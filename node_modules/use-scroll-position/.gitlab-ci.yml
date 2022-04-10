@@ -1,0 +1,17 @@
+image: node:latest
+
+pages:
+  script:
+  - npm install
+  - npm run build
+  # Holy hack for real?
+  - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>.npmrc
+  - npm publish
+  artifacts:
+    paths:
+    - public
+  cache:
+    paths:
+      - node_modules
+  only:
+  - master
