@@ -21,6 +21,7 @@ import Error404 from "./pages/Error404";
 import { lazy, Suspense, useEffect } from "react";
 import Setting from "./layouts/Setting";
 import { ThemeContext } from "../context/ThemeContext";
+import ProductList from "./pages/ProductList";
 import EventSidebar from "./layouts/EventSidebar";
 import { Row, Card, Col, Button } from "react-bootstrap";
 const Todo = lazy(() => import("./pages/Todo"));

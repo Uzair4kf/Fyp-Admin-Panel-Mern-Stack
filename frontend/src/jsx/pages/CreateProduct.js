@@ -17,11 +17,10 @@ export default function CreateProduct({ match }) {
   const { state } = useLocation();
   const updateProduct = (id) =>
     axios.put(`/ecom-product-list/${id}`, {
-      id: a?._id,   
-      name: a?.name,
-      category: "pol",
-      descirption: "iop",
-      price: 12,
+      name: name,
+      category: a?.category,
+      descirption: a?.description,
+      price: price,
     });
 
   useEffect(() => {
@@ -34,14 +33,11 @@ export default function CreateProduct({ match }) {
   }, [products]);
 
   let id = window.location.href.slice(47);
-  console.log(id);
+  console.log(products);
   let a = products?.find((y) => {
     return y._id === id;
   });
-  console.log(a);
-  updateProduct(a?._id).then((res) => {
-    console.log(res.data);
-  });
+
   return (
     <>
       <Row>
@@ -146,9 +142,7 @@ export default function CreateProduct({ match }) {
           className="me-2"
           variant="primary btn-lg"
           onClick={() => {
-            updateProduct(a?._id).then((data) => {
-              console.log(data);
-            });
+            updateProduct(a?._id, a?.name);
           }}
         >
           Create Product

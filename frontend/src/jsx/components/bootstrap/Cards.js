@@ -84,7 +84,6 @@ const UiCards = () => {
           </div>
         </div>
       </Row>
-      <Button>Ai</Button>
     </Fragment>
   );
 };

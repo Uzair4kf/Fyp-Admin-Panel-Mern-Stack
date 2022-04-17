@@ -13,6 +13,7 @@ const router = express.Router();
 router.route("/").get(getProducts).post(createProduct);
 
 router
+  .use(express.json())
   .route("/:id")
   .get(getProductById)
   .delete(deleteProduct)

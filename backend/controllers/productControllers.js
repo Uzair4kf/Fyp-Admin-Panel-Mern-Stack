@@ -1,10 +1,14 @@
 import Product from "../models/productModel.js";
+import express from "express";
+import bodyParser from "body-parser";
 
+var jsonParser = bodyParser.json();
 const getProducts = async (req, res) => {
   const products = await Product.find({});
 
   res.json(products);
 };
+
 const getProductById = async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
@@ -39,22 +43,43 @@ const createProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-  const price = req.body?.price;
-  const description = req.body?.description;
-  const name = req.body?.name;
-  const category = req.body?.category;
-  console.log(await name);
-  const product = await Product.findById(req.params.id);
+  const { name, category, description, price } = req.body;
 
+  const product = await Product.findById(req.params?.id);
   if (product) {
     product.name = name;
     product.price = price;
     product.description = description;
     product.category = category;
+  } else {
+    res.status(400);
+    throw new Error("Product error");
   }
+ 
   const updatedProduct = await product.save();
+
   res.json(updatedProduct);
 };
+// const updateProduct = async (req, res) => {
+//   const price = req.body?.price;
+//   const description = req.body?.description;
+//   const name = req.body?.name;
+//   const category = req.body?.category;
+
+//   const product = await Product.findById(req.params?.id);
+// console.log(req.params?.id)
+//   if (product) {
+//     product.name = name;
+//     product.price = price;
+//     product.description = description;
+//     product.category = category;
+//   } else {
+//     res.status(400);
+//     throw new Error("Product error");
+//   }
+//   const updatedProduct = await product.save();
+//   res.json(updatedProduct);
+// };
 
 export {
   getProducts,

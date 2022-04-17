@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { Link } from "react-router-dom";
 /// Scroll
@@ -13,8 +13,8 @@ import SearchContext from "../../../context/SearchContext";
 import { createContext } from "react";
 
 const Header = ({ onNote }) => {
-  const [searchItem, setSearchItem] = useState();
- 
+  const { setSearchItem } = useContext(SearchContext);
+
   var path = window.location.pathname.split("/");
   var name = path[path.length - 1].split("-");
   var filterName = name.length >= 3 ? name.filter((n, i) => i > 0) : name;
@@ -41,10 +41,8 @@ const Header = ({ onNote }) => {
     : filterName.includes("editor")
     ? filterName.filter((f) => f !== "editor")
     : filterName;
-  const state = searchItem;
 
   return (
-    
     <div className="header">
       <div className="header-content">
         <nav className="navbar navbar-expand">

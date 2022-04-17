@@ -5,6 +5,9 @@ import ProductDetail from "./ProductDetail";
 import { Row, Card, Col, Button, Nav, Image } from "react-bootstrap";
 
 export default function ({ product, deleteP, seti }) {
+
+
+  
   let a = 0;
   let navigate = useHistory();
   const createProduct = () => {
@@ -33,7 +36,7 @@ export default function ({ product, deleteP, seti }) {
                     className="me-2"
                     variant="danger btn-rounded"
                     onClick={() => {
-                      seti(a++);
+                      seti((prev) => prev + 2);
                       console.log(a);
                       deleteP(product._id);
                     }}

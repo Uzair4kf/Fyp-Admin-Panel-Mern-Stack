@@ -17,7 +17,9 @@ const EventSidebar = ({ activeEvent }) => {
     >
       <div className="card rounded-0 mb-0 h-auto bg-transparent shadow-none">
         <div className="card-body event-calender pb-2 text-center">
-          <Calendar onChange={onChange} value={value} />
+          <Calendar onClickDay={()=>{
+            console.log('jkgn')
+          }}  onChange={onChange} value={value} />
         </div>
       </div>
     </PerfectScrollbar>
