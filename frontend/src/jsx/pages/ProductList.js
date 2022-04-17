@@ -165,8 +165,8 @@ export default function () {
   const currentProducts = products?.slice(indexofFirstPage, indexofLastPage);
   useEffect(() => {
     const fetchproducts = async () => {
-      // const { data } = await axios.get("/ecom-product-list");
-      setProducts(productf);
+      const { data } = await axios.get("/ecom-product-list");
+      setProducts(data);
     };
     fetchproducts();
   }, [s]);
