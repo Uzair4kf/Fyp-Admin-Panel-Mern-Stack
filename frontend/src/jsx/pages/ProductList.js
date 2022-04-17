@@ -117,9 +117,8 @@ export default function () {
       >
         Create
       </Link>
-      <Button onClick={sort}>Sort</Button>
+
       <Row>
-        {console.log(currentProducts)}
         {currentProducts.map((product, i) => {
           return (
             <Product product={product} key={i} deleteP={deleteP} seti={seti} />
