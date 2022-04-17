@@ -15,7 +15,7 @@ import products from "./products";
 import Product from "./Product";
 import axios from "axios";
 import Pagination from "../components/bootstrap/Pagination";
-import alanBtn from "@alan-ai/alan-sdk-web";
+
 import SearchContext from "../../context/SearchContext";
 export default function () {
   const { searchItem } = useContext(SearchContext);
