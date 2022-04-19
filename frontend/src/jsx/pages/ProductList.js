@@ -29,11 +29,11 @@ export default function () {
   //Prop used to re render component on delete
   const [i, seti] = useState(0);
   const [s, sets] = useState(0);
-  const paginate = (pageNumber) => {
+  const paginate = (pageNumber) =>  {
     setCurrentPage(pageNumber);
   };
 
-  const renders = useRef(0);
+  const renders = useRef(0); 
   console.log(renders.current++);
 
   const indexofLastPage = currentPage * postperPage;
