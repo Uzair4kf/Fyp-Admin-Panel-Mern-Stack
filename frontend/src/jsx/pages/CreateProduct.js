@@ -148,7 +148,7 @@ export default function CreateProduct({ match }) {
                     class="form-control form-control-lg"
                     type="file"
                     placeholder="image"
-                    onChange={ }
+                  
                   />
                 </div>
               </form>
