@@ -43,19 +43,18 @@ const createProduct = async (req, res) => {
 };
 
 const updateProduct = async (req, res) => {
-  const { name, category, description, price } = req.body;
-
   const product = await Product.findById(req.params?.id);
   if (product) {
     product.name = name;
     product.price = price;
     product.description = description;
     product.category = category;
+    product.image = image;
   } else {
     res.status(400);
     throw new Error("Product error");
   }
- 
+
   const updatedProduct = await product.save();
 
   res.json(updatedProduct);

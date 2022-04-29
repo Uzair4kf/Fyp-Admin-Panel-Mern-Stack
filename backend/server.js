@@ -8,9 +8,7 @@ dotenv.config();
 connectDb();
 
 app.use("/ecom-product-list", productRoutes);
-app.get("/ecom-product-list", (req, res) => {
-  res.json(products);
-});
+
 products.forEach((y) => {
   console.log(y);
 });

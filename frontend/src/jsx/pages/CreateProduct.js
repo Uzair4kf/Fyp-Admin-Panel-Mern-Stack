@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Row, Card, Col, Button, Nav, Image } from "react-bootstrap";
@@ -9,7 +9,7 @@ export default function CreateProduct({ match }) {
   const [products, setProducts] = useState();
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
-
+ 
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
@@ -22,7 +22,7 @@ export default function CreateProduct({ match }) {
       descirption: a?.description,
       price: price,
     });
-
+  
   useEffect(() => {
     const fetchproducts = async () => {
       const { data } = await axios.get("/ecom-product-list");
@@ -132,6 +132,23 @@ export default function CreateProduct({ match }) {
                     type="number"
                     placeholder={a?.price}
                     onChange={(e) => setPrice(e.target.value)}
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </Col>
+        <Col xl="6">
+          <div class="card-body">
+            <div class="basic-form">
+              <form>
+                <div class="form-group mb-3">
+                  <input
+                    ref={inputRef}
+                    class="form-control form-control-lg"
+                    type="file"
+                    placeholder="image"
+                    onChange={ }
                   />
                 </div>
               </form>

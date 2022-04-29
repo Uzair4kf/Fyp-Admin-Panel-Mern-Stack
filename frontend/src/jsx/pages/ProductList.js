@@ -29,11 +29,11 @@ export default function () {
   //Prop used to re render component on delete
   const [i, seti] = useState(0);
   const [s, sets] = useState(0);
-  const paginate = (pageNumber) =>  {
+  const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  const renders = useRef(0); 
+  const renders = useRef(0);
   console.log(renders.current++);
 
   const indexofLastPage = currentPage * postperPage;
@@ -45,9 +45,10 @@ export default function () {
       setProducts(data);
     };
     fetchproducts();
-  }, [s]);
+  }, [i, s]);
 
   // useEffect(() => {
+  //   sets((prev) => prev + 1);
   //   let filterProducts = products.filter((val) => {
   //     if (searchItem == "") return val;
   //     else if (val.name?.toLowerCase().includes(searchItem?.toLowerCase())) {
@@ -55,7 +56,7 @@ export default function () {
   //     }
   //   });
   //   setProducts(filterProducts);
-  // }, [searchItem]);
+  // }, []);
 
   const sort = () => {
     sets((prev) => prev + 1);
@@ -66,7 +67,7 @@ export default function () {
     );
   };
 
-  console.log(s);
+  console.log(products);
   //hooks
 
   // useEffect(() => {
@@ -102,9 +103,7 @@ export default function () {
           },
         }}
         onClick={() => {
-          createProduct().then((res) => {
-            console.log(res.data);
-          });
+          createProduct();
         }}
       >
         Create
