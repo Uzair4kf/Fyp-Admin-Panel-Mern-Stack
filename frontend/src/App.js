@@ -71,7 +71,7 @@ function App(props) {
 
       <Route path="/ecom-product-detail/:id">
         <Index route={<ProductDetail />} />
-      </Route>
+      </Route> 
 
       <Route path="/CreateProduct">
         <Index route={<CreateProduct />} />
@@ -79,7 +79,7 @@ function App(props) {
       <Route path="/table-filtering">
         <Index route={<DataTable />} />
       </Route>
-
+ 
       <Route path="/ecom-product-list">
         <Index route={<ProductList />} />
       </Route>
