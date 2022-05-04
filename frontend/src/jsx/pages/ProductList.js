@@ -45,7 +45,7 @@ export default function () {
       setProducts(data);
     };
     fetchproducts();
-  }, [i, s]);
+  }, [i]);
 
   // useEffect(() => {
   //   sets((prev) => prev + 1);
@@ -58,7 +58,8 @@ export default function () {
   //   setProducts(filterProducts);
   // }, []);
 
-  const sort = () => {
+  const sort = (e) => {
+    e.preventDefault();
     sets((prev) => prev + 1);
     setProducts(
       products.sort((a, b) => {
@@ -92,6 +93,7 @@ export default function () {
 
   return (
     <>
+      <Button onClick={sort}>Sort</Button>
       <Link
         to={{
           pathname: `/CreateProduct`,

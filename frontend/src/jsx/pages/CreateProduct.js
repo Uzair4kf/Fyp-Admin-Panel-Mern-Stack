@@ -7,22 +7,30 @@ import newProducts from "./ProductList";
 import prefixName from "redux-form/lib/util/prefixName";
 export default function CreateProduct({ match }) {
   const [products, setProducts] = useState();
+  let id = window.location.href.slice(47);
+  console.log(products);
+  let a = products?.find((y) => {
+    return y._id === id;
+  });
+
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
- 
+  const [quantity, setQuantity] = useState(0);
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
   const { state } = useLocation();
+
   const updateProduct = (id) =>
     axios.put(`/ecom-product-list/${id}`, {
       name: name,
       category: a?.category,
       descirption: a?.description,
       price: price,
+      quantity: quantity,
     });
-  
+
   useEffect(() => {
     const fetchproducts = async () => {
       const { data } = await axios.get("/ecom-product-list");
@@ -30,13 +38,7 @@ export default function CreateProduct({ match }) {
     };
 
     fetchproducts();
-  }, [products]);
-
-  let id = window.location.href.slice(47);
-  console.log(products);
-  let a = products?.find((y) => {
-    return y._id === id;
-  });
+  }, []);
 
   return (
     <>
@@ -49,10 +51,18 @@ export default function CreateProduct({ match }) {
                   <input
                     class="form-control form-control-lg"
                     type="text"
-                    placeholder={a?.name}
-                    onChange={(e) => setName(e.target.value)}
+                    defaultValue={a?.name}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      if (!e.target.value == "") {
+                        setName(e.target.value);
+                      } else {
+                        setName(a?.name);
+                      }
+                    }}
                   />
                 </div>
+                {console.log(name)}
               </form>
             </div>
           </div>
@@ -144,11 +154,25 @@ export default function CreateProduct({ match }) {
               <form>
                 <div class="form-group mb-3">
                   <input
-                    ref={inputRef}
+                    class="form-control form-control-lg"
+                    type="number"
+                    placeholder={a?.quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </Col>
+        <Col xl="6">
+          <div class="card-body">
+            <div class="basic-form">
+              <form>
+                <div class="form-group mb-3">
+                  <input
                     class="form-control form-control-lg"
                     type="file"
                     placeholder="image"
-                  
                   />
                 </div>
               </form>
