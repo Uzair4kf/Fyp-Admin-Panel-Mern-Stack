@@ -3,16 +3,14 @@ import dotenv from "dotenv";
 import products from "./data/products.js";
 import connectDb from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 const app = express();
 dotenv.config();
 connectDb();
 
 app.use("/ecom-product-list", productRoutes);
+app.use("/ecom-customers", userRoutes);
 
-products.forEach((y) => {
-  console.log(y);
-});
-console.log("heb");
 app.get("/ecom-product-list/:id", (req, res) => {
   const product = products.find((p) => p._id === req.params.id);
 
