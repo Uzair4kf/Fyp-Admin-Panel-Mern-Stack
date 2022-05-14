@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useLocation, useHistory } from "react-router-dom";
-import { Row, Card, Col, Button, Nav, Image } from "react-bootstrap";
+import { Row,   Col, Button, Dropdown } from "react-bootstrap";
 
-import newProducts from "./ProductList";
-import prefixName from "redux-form/lib/util/prefixName";
 export default function CreateProduct() {
  
   const [products, setProducts] = useState();
@@ -22,6 +20,7 @@ export default function CreateProduct() {
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
  
+
 
   const updateProduct = (id) => {
     axios.put(`/ecom-product-list/${id}`, {
@@ -101,22 +100,17 @@ export default function CreateProduct() {
             </div>
           </div>
         </Col>
-        <Col xl="6">
-          <div class="card-body">
-            <div class="basic-form">
-              <form>
-                <div class="form-group mb-3">
-                  <input
-                    class="form-control form-control-lg"
-                    type="text"
-                    placeholder={a?.category}
-                    onChange={(e) => setCategory(e.target.value)}
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-        </Col>
+        <Dropdown>
+          <Dropdown.Toggle   id="dropdown-basic">
+            SubCategory
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+ 
+          </Dropdown.Menu>
+        </Dropdown>
 
         <Col xl="6">
           <div class="card-body">

@@ -3,17 +3,35 @@ import React from "react";
 import { Row, Card, Col, Button, Nav } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 export default function SubCategory({ subcategory }) {
+  let navigate = useHistory();
+  const updateSubcategory = () => {
+    let path = `/Createsubcategory/${subcategory._id}`;
+
+    navigate.push(path);
+  };
   return (
     <>
       <Col xl="6">
         <Card>
           <Card.Header>
             <Card.Title>
-              {subcategory.name}
+              <Link
+                to={{
+                  pathname: `/SubcategoryDetail/${subcategory._id}`,
+                }}
+              >
+                {subcategory.name}
+              </Link>
               <Button className="me-2" variant="danger btn-rounded">
                 Remove
               </Button>
-              <Button className="me-2" variant="success">
+              <Button
+                className="me-2"
+                variant="success"
+                onClick={() => {
+                  updateSubcategory();
+                }}
+              >
                 Update
               </Button>
             </Card.Title>
