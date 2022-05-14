@@ -26,15 +26,7 @@ export default function ({ match }) {
     return y._id === id;
   });
 
-  // const b = Object.values(a);
-
-  // pro.forEach((y) => {
-  //   if (y.id === Number(match.params.id)) {
-  //     setProduct(y);
-
-  //   }
-
-  // });
+ 
 
   return (
     <>

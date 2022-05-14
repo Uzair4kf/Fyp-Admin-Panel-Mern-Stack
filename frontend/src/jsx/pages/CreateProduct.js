@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { Row, Card, Col, Button, Nav, Image } from "react-bootstrap";
 
 import newProducts from "./ProductList";
 import prefixName from "redux-form/lib/util/prefixName";
-export default function CreateProduct({ match }) {
+export default function CreateProduct() {
+ 
   const [products, setProducts] = useState();
   let id = window.location.href.slice(47);
-  console.log(products);
+
   let a = products?.find((y) => {
     return y._id === id;
   });
@@ -20,9 +21,9 @@ export default function CreateProduct({ match }) {
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
-  const { state } = useLocation();
+ 
 
-  const updateProduct = (id) =>
+  const updateProduct = (id) => {
     axios.put(`/ecom-product-list/${id}`, {
       name: name,
       category: a?.category,
@@ -30,6 +31,7 @@ export default function CreateProduct({ match }) {
       price: price,
       quantity: quantity,
     });
+  };
 
   useEffect(() => {
     const fetchproducts = async () => {
@@ -186,7 +188,7 @@ export default function CreateProduct({ match }) {
             updateProduct(a?._id, a?.name);
           }}
         >
-          Create Product
+          Update Product
         </Button>
       </Row>
     </>

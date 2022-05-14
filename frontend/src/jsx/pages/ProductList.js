@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Row, Card, Col, Button, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Row,   Button,  } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
 import useAlan from "../hooks/useAlan";
-import CreateProduct from "./CreateProduct";
-import products from "./products";
+ 
 import Product from "./Product";
 import axios from "axios";
 import Pagination from "../components/bootstrap/Pagination";
 
 import SearchContext from "../../context/SearchContext";
 export default function () {
+  const history = useHistory();
   const { searchItem } = useContext(SearchContext);
 
   //Initialization
@@ -19,12 +19,16 @@ export default function () {
   const [currentPage, setCurrentPage] = useState(1);
   const [postperPage, setPostPerPage] = useState(10);
 
-  let p = [];
   const [alanInstance, setAlanInstance] = useState();
   const alanKey = `1924fbdbfa5f99b552c43824c5134e1c2e956eca572e1d8b807a3e2338fdd0dc/stage`;
 
   const deleteP = (id) => [axios.delete(`/ecom-product-list/${id}`)];
-  const createProduct = () => axios.post(`/ecom-product-list}`);
+  const createProduct = async () => {
+    
+    const { data } = await axios.post(`/ecom-product-list`, {});
+     let path=`/CreateProduct/${data._id}`
+     history.push(path)
+  };
 
   //Prop used to re render component on delete
   const [i, seti] = useState(0);
@@ -42,21 +46,11 @@ export default function () {
   useEffect(() => {
     const fetchproducts = async () => {
       const { data } = await axios.get("/ecom-product-list");
+
       setProducts(data);
     };
     fetchproducts();
   }, [i]);
-
-  // useEffect(() => {
-  //   sets((prev) => prev + 1);
-  //   let filterProducts = products.filter((val) => {
-  //     if (searchItem == "") return val;
-  //     else if (val.name?.toLowerCase().includes(searchItem?.toLowerCase())) {
-  //       return val;
-  //     }
-  //   });
-  //   setProducts(filterProducts);
-  // }, []);
 
   const sort = (e) => {
     e.preventDefault();
@@ -94,22 +88,15 @@ export default function () {
   return (
     <>
       <Button onClick={sort}>Sort</Button>
-      <Link
-        to={{
-          pathname: `/CreateProduct`,
-          state: {
-            id: 1,
-            name: "sabaoon",
-            shirt: "green",
-            products: products,
-          },
-        }}
+      <Button
+        
+         
         onClick={() => {
           createProduct();
         }}
       >
         Create
-      </Link>
+      </Button>
 
       <Row>
         {currentProducts.map((product, i) => {

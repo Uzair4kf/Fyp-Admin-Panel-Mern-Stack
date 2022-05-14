@@ -12,7 +12,8 @@ import SearchContext from "./context/SearchContext";
 import ProductList from "./jsx/pages/ProductList";
 import Profile from "./jsx/pages/Profile";
 import CreateProduct from "./jsx/pages/CreateProduct";
-
+import CategoryList from "./jsx/pages/CategoryList";
+import CreateCategory from "./jsx/pages/CreateCategory";
 import EventSidebar from "./jsx/layouts/EventSidebar";
 import { ThemeContext } from "../src/context/ThemeContext";
 import Editable from "./jsx/pages/Editable";
@@ -76,12 +77,18 @@ function App(props) {
       <Route path="/CreateProduct">
         <Index route={<CreateProduct />} />
       </Route>
+      <Route path="/CreateCategory">
+        <Index route={<CreateCategory />} />
+      </Route>
       <Route path="/ecom-customers">
         <Index route={<DataTable />} />
       </Route>
 
       <Route path="/ecom-product-list">
         <Index route={<ProductList />} />
+      </Route>
+      <Route path="/ecom-categories">
+        <Index route={<CategoryList />} />
       </Route>
     </Switch>
   );

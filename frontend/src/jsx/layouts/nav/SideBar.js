@@ -342,11 +342,11 @@ const SideBar = () => {
                   <li>
                     <Link
                       className={`${
-                        path === "ecom-product-order" ? "mm-active" : ""
+                        path === "ecom-categories" ? "mm-active" : ""
                       }`}
-                      to="/ecom-product-order"
+                      to="/ecom-categories"
                     >
-                      Order
+                      Categories
                     </Link>
                   </li>
                   <li>

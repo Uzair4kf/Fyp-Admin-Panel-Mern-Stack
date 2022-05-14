@@ -1,17 +1,15 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import ProductDetail from "./ProductDetail";
 
+import axios from "axios";
 import { Row, Card, Col, Button, Nav, Image } from "react-bootstrap";
 
 export default function ({ product, deleteP, seti }) {
-
-
-  
   let a = 0;
   let navigate = useHistory();
   const createProduct = () => {
     let path = `/CreateProduct/${product._id}`;
+    axios.put(`/ecom-product-list`, {});
     navigate.push(path);
   };
   return (
