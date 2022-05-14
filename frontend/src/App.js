@@ -19,6 +19,7 @@ import CreateSubcategory from "./jsx/pages/CreateSubcategory";
 import CreateCategory from "./jsx/pages/CreateCategory";
 import EventSidebar from "./jsx/layouts/EventSidebar";
 import { ThemeContext } from "../src/context/ThemeContext";
+import ProductContext from "./context/ProductContext";
 import Editable from "./jsx/pages/Editable";
 import { connect, useDispatch } from "react-redux";
 import { Route, Switch, withRouter } from "react-router-dom";
@@ -43,7 +44,7 @@ const Login = lazy(() => {
 });
 
 function App(props) {
-  const search = useContext(ThemeContext);
+ 
 
   const { menuToggle } = useContext(ThemeContext);
   const dispatch = useDispatch();
@@ -89,9 +90,11 @@ function App(props) {
       <Route path="/ecom-subcategories">
         <Index route={<SubCategoryList />} />
       </Route>
-      <Route path="/SubCategoryDetail">
-        <Index route={<SubcategoryDetail />} />
-      </Route>
+      <ProductContext.Provider>
+        <Route path="/SubCategoryDetail">
+          <Index route={<SubcategoryDetail />} />
+        </Route>
+      </ProductContext.Provider>
       <Route path="/ecom-customers">
         <Index route={<DataTable />} />
       </Route>

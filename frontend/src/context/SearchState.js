@@ -1,12 +1,10 @@
 import SearchContext from "./SearchContext";
 
-const SearchState = (props) => {
-  const state = {
-    name: "Lop",
-  };
+const SearchState = ({children}) => {
+  
   return (
     <SearchContext.Provider value={state}>
-      {props.children}
+      {children}
     </SearchContext.Provider>
   );
 };
