@@ -11,8 +11,10 @@ import ProductDetail from "./jsx/pages/ProductDetail";
 import SearchContext from "./context/SearchContext";
 import ProductList from "./jsx/pages/ProductList";
 import Profile from "./jsx/pages/Profile";
+import SubCategoryList from "./jsx/pages/SubCategoryList";
 import CreateProduct from "./jsx/pages/CreateProduct";
 import CategoryList from "./jsx/pages/CategoryList";
+import CreateSubcategory from "./jsx/pages/CreateSubcategory";
 import CreateCategory from "./jsx/pages/CreateCategory";
 import EventSidebar from "./jsx/layouts/EventSidebar";
 import { ThemeContext } from "../src/context/ThemeContext";
@@ -79,6 +81,12 @@ function App(props) {
       </Route>
       <Route path="/CreateCategory">
         <Index route={<CreateCategory />} />
+      </Route>
+      <Route path="/CreateSubcategory">
+        <Index route={<CreateSubcategory />} />
+      </Route>
+      <Route path="/ecom-subcategories">
+        <Index route={<SubCategoryList />} />
       </Route>
       <Route path="/ecom-customers">
         <Index route={<DataTable />} />

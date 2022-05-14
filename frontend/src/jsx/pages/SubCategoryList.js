@@ -1,8 +1,12 @@
-import React from "react";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import { Row, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
+import SubCategory from "./SubCategory";
+
 export default function SubCategoryList() {
+  const history = useHistory();
   const createSubcategory = async () => {
     const { data } = await axios.post(`/ecom-subcategories`, {});
     let path = `/CreateSubcategory/${data._id}`;
@@ -21,7 +25,7 @@ export default function SubCategoryList() {
     <>
       <Button
         onClick={() => {
-          createsubCategory();
+          createSubcategory();
         }}
       >
         Create Sub Category
@@ -29,7 +33,7 @@ export default function SubCategoryList() {
 
       <Row>
         {subcategories.map((subcategory, i) => {
-          return <Product subcategory={subcategory} key={i} />;
+          return <SubCategory subcategory={subcategory} key={i} />;
         })}
       </Row>
     </>
