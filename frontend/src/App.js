@@ -9,6 +9,7 @@ import Navb from "./jsx/layouts/nav";
 import Footer from "./jsx/layouts/Footer";
 import ProductDetail from "./jsx/pages/ProductDetail";
 import SearchContext from "./context/SearchContext";
+import SubcategoryDetail from "./jsx/pages/SubcategoryDetail";
 import ProductList from "./jsx/pages/ProductList";
 import Profile from "./jsx/pages/Profile";
 import SubCategoryList from "./jsx/pages/SubCategoryList";
@@ -87,6 +88,9 @@ function App(props) {
       </Route>
       <Route path="/ecom-subcategories">
         <Index route={<SubCategoryList />} />
+      </Route>
+      <Route path="/SubCategoryDetail">
+        <Index route={<SubcategoryDetail />} />
       </Route>
       <Route path="/ecom-customers">
         <Index route={<DataTable />} />

@@ -86,7 +86,7 @@ export default function ({ product, deleteP, seti }) {
                       </span>
                     </p>
                     <p>
-                      Product code: <span class="item">0405689</span>{" "}
+                      Sub Category <span class="item"> {product.category}</span>{" "}
                     </p>
                     <p>
                       Quantity <span class="item">{product.quantity}</span>

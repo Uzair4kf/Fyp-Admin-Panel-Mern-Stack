@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 export default function SubcategoryDetail() {
-  return (
-    < > 
-    
-    </ >
-  )
+  const id = window.location.href.slice("51");
+
+  console.log(id);
+  
+  return <></>;
 }

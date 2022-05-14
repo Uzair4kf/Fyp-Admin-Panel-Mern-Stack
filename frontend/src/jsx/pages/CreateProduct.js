@@ -1,16 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useLocation, useHistory } from "react-router-dom";
-import { Row,   Col, Button, Dropdown } from "react-bootstrap";
+import { Row, Col, Button, Dropdown } from "react-bootstrap";
 
 export default function CreateProduct() {
- 
+  const [subcategories, setSubcategories] = useState([]);
   const [products, setProducts] = useState();
   let id = window.location.href.slice(47);
 
   let a = products?.find((y) => {
     return y._id === id;
   });
+  console.log(subcategories);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -19,14 +20,14 @@ export default function CreateProduct() {
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
- 
-
-
+  const handleSelect = (e) => {
+    setCategory(e);
+  };
   const updateProduct = (id) => {
     axios.put(`/ecom-product-list/${id}`, {
       name: name,
-      category: a?.category,
-      descirption: a?.description,
+      category: category,
+      descirption: description,
       price: price,
       quantity: quantity,
     });
@@ -39,6 +40,13 @@ export default function CreateProduct() {
     };
 
     fetchproducts();
+
+    const fetchsubcategories = async () => {
+      const { data } = await axios.get("/ecom-subcategories");
+
+      setSubcategories(data);
+    };
+    fetchsubcategories();
   }, []);
 
   return (
@@ -101,14 +109,20 @@ export default function CreateProduct() {
           </div>
         </Col>
         <Dropdown>
-          <Dropdown.Toggle   id="dropdown-basic">
-            SubCategory
-          </Dropdown.Toggle>
+          <Dropdown.Toggle id="dropdown-basic">SubCategory</Dropdown.Toggle>
 
           <Dropdown.Menu>
-
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
- 
+            {subcategories.map((subcategory, i) => {
+              return (
+                <Dropdown.Item
+                  onSelect={() => {
+                    handleSelect(subcategory.name);
+                  }}
+                >
+                  {subcategory.name}
+                </Dropdown.Item>
+              );
+            })}
           </Dropdown.Menu>
         </Dropdown>
 
