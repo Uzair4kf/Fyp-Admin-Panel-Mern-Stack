@@ -17,7 +17,7 @@ export default function SubCategory({ subcategory }) {
             <Card.Title>
               <Link
                 to={{
-                  pathname: `/SubCategoryDetail/${subcategory._id}`,
+                  pathname: `/SubCategoryDetail/${subcategory._id}/${subcategory.name}`,
                 }}
               >
                 {subcategory.name}

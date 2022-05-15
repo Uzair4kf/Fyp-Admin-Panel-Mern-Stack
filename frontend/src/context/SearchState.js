@@ -1,12 +1,7 @@
 import SearchContext from "./SearchContext";
 
-const SearchState = ({children}) => {
-  
-  return (
-    <SearchContext.Provider value={state}>
-      {children}
-    </SearchContext.Provider>
-  );
+const SearchState = ({ children }) => {
+  return <SearchContext.Provider>{children}</SearchContext.Provider>;
 };
 
 export default SearchState;

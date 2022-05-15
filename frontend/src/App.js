@@ -44,8 +44,6 @@ const Login = lazy(() => {
 });
 
 function App(props) {
- 
-
   const { menuToggle } = useContext(ThemeContext);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -90,11 +88,11 @@ function App(props) {
       <Route path="/ecom-subcategories">
         <Index route={<SubCategoryList />} />
       </Route>
-      <ProductContext.Provider>
-        <Route path="/SubCategoryDetail">
-          <Index route={<SubcategoryDetail />} />
-        </Route>
-      </ProductContext.Provider>
+
+      <Route path="/SubCategoryDetail">
+        <Index route={<SubcategoryDetail />} />
+      </Route>
+
       <Route path="/ecom-customers">
         <Index route={<DataTable />} />
       </Route>
