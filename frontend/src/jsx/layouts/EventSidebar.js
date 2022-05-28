@@ -18,7 +18,7 @@ const EventSidebar = ({ activeEvent }) => {
   const [eventdesc, setEventDesc] = useState();
   const [hasEvent, setHasEvent] = useState(false);
   const [calendarEvents, setCalendarEvents] = useState([]);
-  const [cal, setCal] = useState(false);
+  const [cal, setCal] = useState();
   // const fulldate = date.getDate().concat(date.getMonth() + 1);
 
   useEffect(() => {
@@ -50,18 +50,19 @@ const EventSidebar = ({ activeEvent }) => {
             onClickDay={(date) => {
               setLargeModal(true);
               setDate(date);
+              console.log("date :", date);
 
               calendarEvents.map((event) => {
-                console.log(" return :", date.toLocaleDateString());
+                if (date.toLocaleDateString() == event.eventDate) {
+                  
+                  updateEvent(event.name, event.description);
+                  console.log("eventname :", event.name);
+                }
               });
-              setCal(
-                calendarEvents.map((event) => {
-                  return date.toLocaleDateString() == event.eventDate;
-                })
-              );
 
+              console.log("eventname", eventName);
               console.log(" dateLocal", date.toLocaleDateString());
-              console.log("Cal", cal);
+
               // if (cal) {
               //   setEventName(cal.eventname);
               //   setEventDesc(cal.description);
