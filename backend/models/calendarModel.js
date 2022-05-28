@@ -10,7 +10,7 @@ const calendarSchema = mongoose.Schema(
       type: String,
       required: false,
     },
-    Eventdate: {
+    eventDate: {
       type: String,
       required: false,
     },

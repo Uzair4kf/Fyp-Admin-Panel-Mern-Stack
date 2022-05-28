@@ -1,17 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Card, Col, Button, Modal, Container } from "react-bootstrap";
 /// Scrol
 import PerfectScrollbar from "react-perfect-scrollbar";
 
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { Link } from "react-router-dom";
+import moment from "moment";
+
+import axios from "axios";
 
 const EventSidebar = ({ activeEvent }) => {
   const [date, setDate] = useState(new Date());
+  const [formatDate, setFormatDate] = useState("");
+
   const [largeModal, setLargeModal] = useState(false);
   const [eventName, setEventName] = useState();
   const [eventdesc, setEventDesc] = useState();
+  const [hasEvent, setHasEvent] = useState(false);
+  const [calendarEvents, setCalendarEvents] = useState([]);
+  const [cal, setCal] = useState(false);
+  // const fulldate = date.getDate().concat(date.getMonth() + 1);
+
+  useEffect(() => {
+    const fetchcalendarEvents = async () => {
+      const { data } = await axios.get("/ecom-calendar");
+
+      setCalendarEvents(data);
+    };
+    fetchcalendarEvents();
+  }, []);
+
+  const createCalendarEvent = async () => {
+    const res = await axios.post(`/ecom-calendar`, {
+      name: eventName,
+      description: eventdesc,
+      eventDate: date.toLocaleDateString(),
+    });
+  };
 
   return (
     <PerfectScrollbar
@@ -21,14 +46,32 @@ const EventSidebar = ({ activeEvent }) => {
       <div className="card rounded-0 mb-0 h-auto bg-transparent shadow-none">
         <div className="card-body event-calender pb-2 text-center">
           <Calendar
+            className={hasEvent && "c1"}
             onClickDay={(date) => {
               setLargeModal(true);
               setDate(date);
+
+              calendarEvents.map((event) => {
+                console.log(" return :", date.toLocaleDateString());
+              });
+              setCal(
+                calendarEvents.map((event) => {
+                  return date.toLocaleDateString() == event.eventDate;
+                })
+              );
+
+              console.log(" dateLocal", date.toLocaleDateString());
+              console.log("Cal", cal);
+              // if (cal) {
+              //   setEventName(cal.eventname);
+              //   setEventDesc(cal.description);
+              // }
             }}
             value={date}
           />
         </div>
       </div>
+      {console.log(formatDate)}
 
       <Modal className="fade bd-example-modal-lg" show={largeModal} size="lg">
         <Modal.Header>
@@ -37,7 +80,9 @@ const EventSidebar = ({ activeEvent }) => {
           <Button
             variant=""
             className="btn-close"
-            onClick={() => setLargeModal(false)}
+            onClick={() => {
+              setLargeModal(false);
+            }}
           ></Button>
         </Modal.Header>
         <Modal.Body>
@@ -85,7 +130,7 @@ const EventSidebar = ({ activeEvent }) => {
                     <input
                       class="form-control form-control-lg"
                       type="text"
-                      value={date.toString()}
+                      value={date?.toString()}
                     />
                   </div>
                 </form>
@@ -97,9 +142,19 @@ const EventSidebar = ({ activeEvent }) => {
           <Button variant="danger light" onClick={() => setLargeModal(false)}>
             Close
           </Button>
-          <Button variant="" type="button" className="btn btn-primary">
+          <Button
+            variant="primary light"
+            type="button"
+            className="btn btn-primary"
+            onClick={createCalendarEvent}
+          >
             Save Event
           </Button>
+          {hasEvent && (
+            <Button className="me-2" variant="warning light">
+              Update Event
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     </PerfectScrollbar>
