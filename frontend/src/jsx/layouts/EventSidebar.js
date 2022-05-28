@@ -54,8 +54,8 @@ const EventSidebar = ({ activeEvent }) => {
 
               calendarEvents.map((event) => {
                 if (date.toLocaleDateString() == event.eventDate) {
-                  
-                  updateEvent(event.name, event.description);
+                const eventname = event.name;
+                setEventName(eventname);
                   console.log("eventname :", event.name);
                 }
               });
