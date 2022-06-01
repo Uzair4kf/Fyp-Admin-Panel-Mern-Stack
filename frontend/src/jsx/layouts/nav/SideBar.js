@@ -360,13 +360,8 @@ const SideBar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      className={`${
-                        path === "ecom-invoice" ? "mm-active" : ""
-                      }`}
-                      to="/ecom-invoice"
-                    >
-                      Invoice
+                    <Link className={`${path === "/chat"}`} to="/chat">
+                      Chat
                     </Link>
                   </li>
                   <li>

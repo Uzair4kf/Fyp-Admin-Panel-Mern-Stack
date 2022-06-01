@@ -24,6 +24,7 @@ import Editable from "./jsx/pages/Editable";
 import { connect, useDispatch } from "react-redux";
 import { Route, Switch, withRouter } from "react-router-dom";
 import Calendar from "./jsx/pages/Calendar";
+import Chat from "./jsx/pages/Chat";
 
 import Index from "./jsx";
 import DataTable from "./jsx/pages/DataTable";
@@ -78,6 +79,9 @@ function App(props) {
 
       <Route path="/CreateProduct">
         <Index route={<CreateProduct />} />
+      </Route>
+      <Route path="/chat">
+        <Index route={<Chat />} />
       </Route>
       <Route path="/CreateCategory">
         <Index route={<CreateCategory />} />
