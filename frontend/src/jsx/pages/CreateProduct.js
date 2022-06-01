@@ -20,6 +20,7 @@ export default function CreateProduct() {
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
   const handleSelect = (e) => {
     setCategory(e);
   };
@@ -30,6 +31,7 @@ export default function CreateProduct() {
       descirption: description,
       price: price,
       quantity: quantity,
+      image: image,
     });
   };
 
@@ -183,6 +185,7 @@ export default function CreateProduct() {
                     class="form-control form-control-lg"
                     type="file"
                     placeholder="image"
+                    onChange={(e) => setImage(e.target.value)}
                   />
                 </div>
               </form>
