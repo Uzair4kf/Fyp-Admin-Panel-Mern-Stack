@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import multer from "multer"
+import multer from "multer";
 import connectDb from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -10,7 +10,16 @@ import calendarRoutes from "./routes/calendarRoutes.js";
 const app = express();
 dotenv.config();
 connectDb();
-
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "Images");
+  },
+  filename: (req, file, callback) => {
+    console.log("file :", file);
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+export const upload = multer({ storage: storage });
 app.use("/ecom-product-list", productRoutes);
 app.use("/ecom-customers", userRoutes);
 app.use("/ecom-categories", categoryRoutes);

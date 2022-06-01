@@ -1,8 +1,6 @@
 import Product from "../models/productModel.js";
-import express from "express";
-import bodyParser from "body-parser";
+import { upload } from "../server.js";
 
-var jsonParser = bodyParser.json();
 const getProducts = async (req, res) => {
   const products = await Product.find({});
 

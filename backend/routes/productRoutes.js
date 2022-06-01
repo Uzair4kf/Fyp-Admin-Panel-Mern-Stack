@@ -6,10 +6,11 @@ import {
   createProduct,
   updateProduct,
 } from "../controllers/productControllers.js";
-
+import { upload } from "../server.js";
+const up = upload;
 const router = express.Router();
 
-router.route("/").get(getProducts).post(createProduct);
+router.route("/").get(getProducts).post(up?.single("image"), createProduct);
 
 router
   .use(express.json())
