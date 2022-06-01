@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-
+import multer from "multer"
 import connectDb from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
