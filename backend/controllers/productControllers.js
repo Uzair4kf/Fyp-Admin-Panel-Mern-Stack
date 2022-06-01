@@ -41,13 +41,13 @@ const createProduct = async (req, res) => {
   const createdProduct = await product.save();
   console.log(createdProduct._id);
   res.status(201).json(createdProduct);
-};  
+};
 
 const updateProduct = async (req, res) => {
-  const { name, price, description, category, quantity } = req.body;
+  const { name, price, description, category, quantity, image } = req.body;
   const product = await Product.findById(req.params?.id);
 
-  console.log(req.params.id );
+  console.log(req.params.id);
   if (product) {
     product.name = name;
     product.price = price;
@@ -55,6 +55,7 @@ const updateProduct = async (req, res) => {
     product.category = category;
 
     product.quantity = quantity;
+    product.image = image;
   } else {
     res.status(400);
     throw new Error("Product error");

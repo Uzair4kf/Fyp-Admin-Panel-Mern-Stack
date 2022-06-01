@@ -22,7 +22,9 @@ export default function ({ product, deleteP, seti }) {
                 <Col md="5" xl="12">
                   <div class="new-arrival-product mb-xxl-4 mb-md-0 mb-4">
                     <div class="new-arrivals-img-contnent">
-                      <Card.Img src={product.image} variant="top" />
+                      {console.log(" :", product.image)}
+
+                      <Image src={product.image}   fluid />
                     </div>
                   </div>
                 </Col>
