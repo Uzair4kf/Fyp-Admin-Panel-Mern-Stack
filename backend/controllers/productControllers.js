@@ -6,7 +6,10 @@ const getProducts = async (req, res) => {
 
   res.json(products);
 };
-
+const getProductImage = app.get("/images", async (req, res) => {
+  const products = await Product.find({});
+  res.json(products);
+});
 const getProductById = async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
@@ -15,6 +18,7 @@ const getProductById = async (req, res) => {
     res.status(404).json({ message: "Product not found" });
   }
 };
+
 const deleteProduct = async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
@@ -91,4 +95,5 @@ export {
   deleteProduct,
   createProduct,
   updateProduct,
+  getProductImage,
 };

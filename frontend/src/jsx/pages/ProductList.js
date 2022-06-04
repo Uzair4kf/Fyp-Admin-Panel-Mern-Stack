@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Row,   Button,  } from "react-bootstrap";
+import { Row, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import useAlan from "../hooks/useAlan";
- 
+
 import Product from "./Product";
 import axios from "axios";
 import Pagination from "../components/bootstrap/Pagination";
@@ -15,7 +15,7 @@ export default function () {
   //Initialization
   let array = [];
   const [products, setProducts] = useState(array);
-
+  const [productImages, setProductImages] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [postperPage, setPostPerPage] = useState(10);
 
@@ -24,10 +24,9 @@ export default function () {
 
   const deleteP = (id) => [axios.delete(`/ecom-product-list/${id}`)];
   const createProduct = async () => {
-    
     const { data } = await axios.post(`/ecom-product-list`, {});
-     let path=`/CreateProduct/${data._id}`
-     history.push(path)
+    let path = `/CreateProduct/${data._id}`;
+    history.push(path);
   };
 
   //Prop used to re render component on delete
@@ -46,12 +45,22 @@ export default function () {
   useEffect(() => {
     const fetchproducts = async () => {
       const { data } = await axios.get("/ecom-product-list");
+      console.log("data :", data);
 
       setProducts(data);
     };
     fetchproducts();
   }, [i]);
 
+  useEffect(() => {
+    const fetchimages = async () => {
+      const { data } = await axios.get("/images");
+
+      console.log(" data", data);
+      // setProductImages(data);
+    };
+    fetchimages();
+  }, []);
   const sort = (e) => {
     e.preventDefault();
     sets((prev) => prev + 1);
@@ -62,7 +71,6 @@ export default function () {
     );
   };
 
-  console.log(products);
   //hooks
 
   // useEffect(() => {
@@ -89,8 +97,6 @@ export default function () {
     <>
       <Button onClick={sort}>Sort</Button>
       <Button
-        
-         
         onClick={() => {
           createProduct();
         }}

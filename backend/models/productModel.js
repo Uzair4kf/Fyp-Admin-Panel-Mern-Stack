@@ -25,15 +25,11 @@ const productSchema = mongoose.Schema(
 
     image: {
       type: String,
-      required: true,
+      required: false,
     },
 
     category: {
       type: String,
-      required: true,
-    },
-    quantity: {
-      type: Number,
       required: false,
     },
     description: {
