@@ -11,7 +11,6 @@ export default function CreateProduct() {
   let a = products?.find((y) => {
     return y._id === id;
   });
-  console.log(subcategories);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -24,6 +23,7 @@ export default function CreateProduct() {
   const handleSelect = (e) => {
     setCategory(e);
   };
+
   const updateProduct = (id) => {
     axios.put(`/ecom-product-list/${id}`, {
       name: name,
@@ -185,6 +185,7 @@ export default function CreateProduct() {
                     class="form-control form-control-lg"
                     type="file"
                     placeholder="image"
+                    name="image"
                     onChange={(e) => setImage(e.target.value)}
                   />
                 </div>

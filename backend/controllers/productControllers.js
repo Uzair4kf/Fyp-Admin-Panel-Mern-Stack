@@ -1,15 +1,11 @@
 import Product from "../models/productModel.js";
-import { upload } from "../server.js";
 
 const getProducts = async (req, res) => {
   const products = await Product.find({});
 
   res.json(products);
 };
-const getProductImage = app.get("/images", async (req, res) => {
-  const products = await Product.find({});
-  res.json(products);
-});
+
 const getProductById = async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
@@ -32,7 +28,7 @@ const createProduct = async (req, res) => {
   const product = new Product({
     name: "Sample name",
     price: 100,
-    image: "/",
+    image: "../data/7.jpg",
     brand: "Sample brand",
     rating: 2,
     category: "Sample category",
@@ -41,7 +37,7 @@ const createProduct = async (req, res) => {
     description: "Sample description",
   });
   const createdProduct = await product.save();
-  console.log(createdProduct._id);
+ 
   res.status(201).json(createdProduct);
 };
 
@@ -95,5 +91,4 @@ export {
   deleteProduct,
   createProduct,
   updateProduct,
-  getProductImage,
 };

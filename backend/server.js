@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import multer from "multer";
+
 import connectDb from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -8,26 +8,39 @@ import categoryRoutes from "./routes/categoryRoutes.js";
 import subcategoryRoutes from "./routes/subcategoryRoutes.js";
 import calendarRoutes from "./routes/calendarRoutes.js";
 import Product from "./models/productModel.js";
+import multer from "multer";
+import path from "path";
 const app = express();
 dotenv.config();
 connectDb();
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, "Images");
+    console.log("req :", req);
+
+    callback(null, "./Images");
   },
   filename: (req, file, callback) => {
     console.log("file :", file);
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
-export const upload = multer({ storage: storage });
-app.use("/images");
-app.get("/images", async (req, res) => {
-  console.log("req", req);
-  const products = await Product.find({});
-  res.json("jwfn");
-});
+const upload = multer({ storage: storage });
+app.post("/addnew", upload.single("image"), async (req, res, next) => {
+  const product = new Product({
+    name: "Sample name",
+    price: 100,
+    image: "./data/7.jpg",
+    brand: "Sample brand",
+    rating: 2,
+    category: "Sample category",
+    countInStock: 0,
+    numReviews: 0,
+    description: "Sample description",
+  });
+  const createdProduct = await product.save();
 
+  res.status(201).json(createdProduct);
+});
 app.use("/ecom-product-list", productRoutes);
 app.use("/ecom-customers", userRoutes);
 

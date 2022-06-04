@@ -23,8 +23,11 @@ export default function ({ product, deleteP, seti }) {
                   <div class="new-arrival-product mb-xxl-4 mb-md-0 mb-4">
                     <div class="new-arrivals-img-contnent">
                       {console.log(" :", product.image)}
-
-                      <Image src={product.image}   fluid />
+                      <Image
+                        class="img-fluid"
+                        src={require("../pages/1.jpg").default}
+                        alt="pic"
+                      />
                     </div>
                   </div>
                 </Col>
