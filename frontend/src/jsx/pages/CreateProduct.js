@@ -183,11 +183,13 @@ export default function CreateProduct() {
                 <div class="form-group mb-3">
                   <input
                     class="form-control form-control-lg"
-                    type="text"
+                    type="file"
                     placeholder="image"
                     name="image"
                     onChange={(e) => {
                       setImage(e.target.value);
+
+                      console.log(" files", e.target.files);
                     }}
                   />
                 </div>
