@@ -24,10 +24,10 @@ export default function () {
 
   const deleteP = (id) => [axios.delete(`/ecom-product-list/${id}`)];
   const createProduct = async () => {
-    // const { data } = await axios.post(`/ecom-product-list`, {});
-    // let path = `/CreateProduct/${data._id}`;
-    // history.push(path);
-    await axios.post(`/addnew`, {});
+    const { data } = await axios.post(`/ecom-product-list`, {});
+    let path = `/CreateProduct/${data._id}`;
+    history.push(path);
+  
   };
 
   //Prop used to re render component on delete

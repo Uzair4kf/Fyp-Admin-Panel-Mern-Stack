@@ -19,7 +19,6 @@ import CreateSubcategory from "./jsx/pages/CreateSubcategory";
 import CreateCategory from "./jsx/pages/CreateCategory";
 import EventSidebar from "./jsx/layouts/EventSidebar";
 import { ThemeContext } from "../src/context/ThemeContext";
-import ProductContext from "./context/ProductContext";
 import Editable from "./jsx/pages/Editable";
 import { connect, useDispatch } from "react-redux";
 import { Route, Switch, withRouter } from "react-router-dom";

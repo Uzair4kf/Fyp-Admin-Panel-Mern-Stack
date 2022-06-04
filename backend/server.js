@@ -40,6 +40,7 @@ app.post("/addnew", upload.single("image"), async (req, res, next) => {
   const createdProduct = await product.save();
 
   res.status(201).json(createdProduct);
+  console.log("createdProduct :", createdProduct);
 });
 app.use("/ecom-product-list", productRoutes);
 app.use("/ecom-customers", userRoutes);

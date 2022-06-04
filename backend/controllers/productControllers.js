@@ -37,7 +37,7 @@ const createProduct = async (req, res) => {
     description: "Sample description",
   });
   const createdProduct = await product.save();
- 
+
   res.status(201).json(createdProduct);
 };
 
@@ -54,6 +54,7 @@ const updateProduct = async (req, res) => {
 
     product.quantity = quantity;
     product.image = image;
+    console.log("image :", image);
   } else {
     res.status(400);
     throw new Error("Product error");
