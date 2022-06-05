@@ -23,6 +23,27 @@ export default function CreateProduct() {
   const handleSelect = (e) => {
     setCategory(e);
   };
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    console.log("formData :", formData);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.post("/upload", formData, config);
+
+      setImage(data);
+      console.log("data :", data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const updateProduct = (id) => {
     axios.put(`/ecom-product-list/${id}`, {
@@ -183,7 +204,7 @@ export default function CreateProduct() {
                 <div class="form-group mb-3">
                   <input
                     class="form-control form-control-lg"
-                    type="file"
+                    type="text"
                     placeholder="image"
                     name="image"
                     onChange={(e) => {
@@ -191,6 +212,13 @@ export default function CreateProduct() {
 
                       console.log(" files", e.target.files);
                     }}
+                  />
+                  <input
+                    type="file"
+                    id="image-file"
+                    label="Choose File"
+                    custom
+                    onChange={uploadFileHandler}
                   />
                 </div>
               </form>

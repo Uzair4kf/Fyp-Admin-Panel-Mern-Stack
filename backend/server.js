@@ -24,7 +24,10 @@ app.use("/ecom-calendar", calendarRoutes);
 app.use("/upload", uploadRoutes);
 
 const __dirname = path.resolve();
-app.use("/uploads", express.static(path.join(__dirname, "/package/Images")));
+app.use(
+  "/package/Images",
+  express.static(path.join(__dirname, "/package/Images"))
+);
 
 const PORT = process.env.PORT || 5001;
 app.listen(

@@ -24,7 +24,10 @@ export default function ({ product, deleteP, seti }) {
                     <div class="new-arrivals-img-contnent">
                       {/* <Image
                         class="img-fluid"
-                        src={require(`${product.image}`).default}
+                        src={
+                          require(`../../../../uploads/image-1654372328601.jpg`)
+                            .default
+                        }
                         alt="pic"
                       /> */}
                     </div>
