@@ -9,6 +9,7 @@ import subcategoryRoutes from "./routes/subcategoryRoutes.js";
 import calendarRoutes from "./routes/calendarRoutes.js";
 import Product from "./models/productModel.js";
 import multer from "multer";
+import fs from "fs"
 import path from "path";
 import uploadRoutes from "./routes/uploadRoutes.js";
 const app = express();
@@ -28,7 +29,7 @@ app.use(
   "/package/uploads",
   express.static(path.join(__dirname, "/package/uploads"))
 );
-
+fs.move()
 const PORT = process.env.PORT || 5001;
 app.listen(
   PORT,
