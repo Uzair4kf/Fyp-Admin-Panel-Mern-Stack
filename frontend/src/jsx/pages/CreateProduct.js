@@ -30,6 +30,7 @@ export default function CreateProduct() {
     console.log("formData :", formData);
 
     try {
+    
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -41,7 +42,7 @@ export default function CreateProduct() {
       setImage(data);
       console.log("data :", data);
     } catch (error) {
-      console.error(error);
+      console.error("error", error);
     }
   };
 

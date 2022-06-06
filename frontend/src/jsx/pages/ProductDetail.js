@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Row, Card, Col, Button, Nav } from "react-bootstrap";
+import React, { useState, useEffect, useRef } from "react";
+import { Row, Card, Col, Button, Nav, Image } from "react-bootstrap";
 import products from "./products";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default function ({ match }) {
-  const { dataP } = useParams();
   const [pro, setPro] = useState([]);
-  const [product, setProduct] = useState();
+
+  const count = useRef(0);
 
   useEffect(() => {
     const fetchproduct = async () => {
@@ -18,16 +18,22 @@ export default function ({ match }) {
 
     fetchproduct();
   }, []);
+  let productLocal = JSON.parse(localStorage.getItem("products"));
+  console.log("productLocal :", typeof productLocal);
+  count.current = count.current + 1;
+  console.log("count :", count.current);
 
   let id = window.location.href.slice(53);
-  console.log(id);
+
+  let product = productLocal.find((product) => {
+    return product._id == id;
+  });
 
   let a = pro.find((y) => {
     return y._id === id;
   });
-
- 
-
+  let image = a?.image.slice(25);
+  console.log("product", a);
   return (
     <>
       <Row>
@@ -36,17 +42,20 @@ export default function ({ match }) {
             <Card className="">
               <Card.Body>
                 <Row>
-                  <Col md="6" xl="3" lg="6">
+                  <Col md="6" xl="3" xxl="3" lg="6">
                     <div className="tab-content">
                       <div
                         role="tabpanel"
                         aria-hidden="false"
                         class="fade tab-pane active show"
                       >
-                        <img
+                        <Image
                           class="img-fluid"
-                          src="/react/demo/static/media/1.31552c36.jpg"
-                          alt=""
+                          src={
+                            require(`../Images/${product.image.slice(25)}`)
+                              .default
+                          }
+                          alt="pic"
                         />
                       </div>
                     </div>

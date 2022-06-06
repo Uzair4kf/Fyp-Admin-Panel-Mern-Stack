@@ -25,8 +25,8 @@ app.use("/upload", uploadRoutes);
 
 const __dirname = path.resolve();
 app.use(
-  "/package/Images",
-  express.static(path.join(__dirname, "/package/Images"))
+  "/package/uploads",
+  express.static(path.join(__dirname, "/package/uploads"))
 );
 
 const PORT = process.env.PORT || 5001;

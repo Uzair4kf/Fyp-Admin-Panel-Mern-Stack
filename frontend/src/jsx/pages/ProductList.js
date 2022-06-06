@@ -27,7 +27,6 @@ export default function () {
     const { data } = await axios.post(`/ecom-product-list`, {});
     let path = `/CreateProduct/${data._id}`;
     history.push(path);
-  
   };
 
   //Prop used to re render component on delete
@@ -47,7 +46,7 @@ export default function () {
     const fetchproducts = async () => {
       const { data } = await axios.get("/ecom-product-list");
       console.log("data :", data);
-
+      localStorage.setItem("products", JSON.stringify(data));
       setProducts(data);
     };
     fetchproducts();
