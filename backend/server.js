@@ -9,7 +9,7 @@ import subcategoryRoutes from "./routes/subcategoryRoutes.js";
 import calendarRoutes from "./routes/calendarRoutes.js";
 import Product from "./models/productModel.js";
 import multer from "multer";
-import fs from "fs"
+import fs from "fs-extra";
 import path from "path";
 import uploadRoutes from "./routes/uploadRoutes.js";
 const app = express();
@@ -29,7 +29,12 @@ app.use(
   "/package/uploads",
   express.static(path.join(__dirname, "/package/uploads"))
 );
-fs.move()
+
+fs.copy("/package/frontend/src/jsx/Images", "../../../Fyp UserSide", (err) => {
+  if (err) return console.error(err);
+  console.log("success!");
+});
+
 const PORT = process.env.PORT || 5001;
 app.listen(
   PORT,
