@@ -12,8 +12,7 @@ export default function ({ product, deleteP, seti }) {
     axios.put(`/ecom-product-list`, {});
     navigate.push(path);
   };
-
-  console.log(" :", product.image.slice("25"));
+  let data = product.image;
   return (
     <>
       <Row>
@@ -24,14 +23,11 @@ export default function ({ product, deleteP, seti }) {
                 <Col md="5" xl="3">
                   <div class="new-arrival-product mb-xxl-4 mb-md-0 mb-4">
                     <div class="new-arrivals-img-contnent">
-                      <Image
+                      {/* <Image
                         class="img-fluid"
-                        src={
-                          require(`../Images/${product.image.slice(25)}`)
-                            .default
-                        }
+                        src={require(`data:image/jpeg;base64,${data}`).default}
                         alt="pic"
-                      />
+                      /> */}
                     </div>
                   </div>
                 </Col>

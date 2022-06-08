@@ -30,10 +30,14 @@ app.use(
   express.static(path.join(__dirname, "/package/uploads"))
 );
 
-fs.copy("/package/frontend/src/jsx/Images", "../../../Fyp UserSide", (err) => {
-  if (err) return console.error(err);
-  console.log("success!");
-});
+// fs.copy(
+//   "Users/limia/Desktop/Dummy Admin Temp",
+//   "../../../Fyp UserSide",
+//   (err) => {
+//     if (err) return console.error(err);
+//     console.log("success!");
+//   }
+// );
 
 const PORT = process.env.PORT || 5001;
 app.listen(
