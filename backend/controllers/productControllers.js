@@ -45,7 +45,7 @@ const updateProduct = async (req, res) => {
   const { name, price, description, category, quantity, image } = req.body;
   const product = await Product.findById(req.params?.id);
 
-  console.log(req.params.id);
+ 
   if (product) {
     product.name = name;
     product.price = price;
@@ -54,7 +54,7 @@ const updateProduct = async (req, res) => {
 
     product.quantity = quantity;
     product.image = image;
-    console.log("image :", image);
+   
   } else {
     res.status(400);
     throw new Error("Product error");

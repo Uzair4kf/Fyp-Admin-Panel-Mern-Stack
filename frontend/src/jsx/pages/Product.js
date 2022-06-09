@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-
+import { Image } from "cloudinary-react";
 import axios from "axios";
-import { Row, Card, Col, Button, Nav, Image } from "react-bootstrap";
+import { Row, Card, Col, Button, Nav } from "react-bootstrap";
 
 export default function ({ product, deleteP, seti }) {
   let a = 0;
@@ -23,11 +23,7 @@ export default function ({ product, deleteP, seti }) {
                 <Col md="5" xl="3">
                   <div class="new-arrival-product mb-xxl-4 mb-md-0 mb-4">
                     <div class="new-arrivals-img-contnent">
-                      {/* <Image
-                        class="img-fluid"
-                        src={require(`data:image/jpeg;base64,${data}`).default}
-                        alt="pic"
-                      /> */}
+                      <Image cloudName="djpdvrlkk" publicId={product.image} />
                     </div>
                   </div>
                 </Col>

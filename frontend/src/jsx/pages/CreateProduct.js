@@ -20,30 +20,46 @@ export default function CreateProduct() {
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
+  const [cloudImage, setCloudImage] = useState();
   const handleSelect = (e) => {
     setCategory(e);
   };
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
+
     const formData = new FormData();
-    formData.append("image", file);
-    console.log("formData :", formData);
 
-    try {
-    
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
+    formData.append("file", file);
+    formData.append("upload_preset", "sw2ks6ox");
+    console.log(formData.get("file"));
 
-      const { data } = await axios.post("/upload", formData, config);
+    const { data } = await axios.post(
+      "https://api.cloudinary.com/v1_1/djpdvrlkk/image/upload",
+      formData
+    );
 
-      setImage(data);
-      console.log("data :", data);
-    } catch (error) {
-      console.error("error", error);
-    }
+    setCloudImage(data);
+    console.log("data :", data);
+
+    // } catch (error) {
+    //   console.log(" error", error.message);
+    // }
+
+    // try {
+
+    //   const config = {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   };
+
+    //   const { data } = await axios.post("/upload", formData, config);
+
+    //   setImage(data);
+    //   console.log("data :", data);
+    // } catch (error) {
+    //   console.error("error", error);
+    // }
   };
 
   const updateProduct = (id) => {
@@ -53,7 +69,7 @@ export default function CreateProduct() {
       descirption: description,
       price: price,
       quantity: quantity,
-      image: image,
+      image: cloudImage?.public_id,
     });
   };
 
@@ -205,13 +221,11 @@ export default function CreateProduct() {
                 <div class="form-group mb-3">
                   <input
                     class="form-control form-control-lg"
-                    type="text"
+                    type="file"
                     placeholder="image"
                     name="image"
                     onChange={(e) => {
-                      setImage(e.target.value);
-
-                      console.log(" files", e.target.files);
+                      setImage(e.target.files[0]);
                     }}
                   />
                   <input
