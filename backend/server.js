@@ -8,6 +8,7 @@ import cartRoutes from "./routes/cartRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import subcategoryRoutes from "./routes/subcategoryRoutes.js";
 import calendarRoutes from "./routes/calendarRoutes.js";
+import sliderRoutes from "./routes/sliderRoutes.js";
 import Product from "./models/productModel.js";
 import multer from "multer";
 import fs from "fs-extra";
@@ -25,6 +26,7 @@ app.use("/ecom-subcategories", subcategoryRoutes);
 app.use("/ecom-calendar", calendarRoutes);
 app.use("/upload", uploadRoutes);
 app.use("/cart", cartRoutes);
+app.use("/Slider", sliderRoutes);
 const __dirname = path.resolve();
 app.use(
   "/package/uploads",
