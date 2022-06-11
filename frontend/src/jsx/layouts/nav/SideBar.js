@@ -351,6 +351,22 @@ const SideBar = () => {
                   </li>
                   <li>
                     <Link
+                      className={`${path === "Cart" ? "mm-active" : ""}`}
+                      to="/Cart"
+                    >
+                      Cart
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`${path === "Slider" ? "mm-active" : ""}`}
+                      to="/Slider"
+                    >
+                      Slider
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       className={`${
                         path === "ecom-subcategories" ? "mm-active" : ""
                       }`}

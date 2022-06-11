@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useLocation, useHistory } from "react-router-dom";
-import { Row, Col, Button, Dropdown } from "react-bootstrap";
+import { Row, Col, Button, Dropdown, Spinner } from "react-bootstrap";
 
 export default function CreateProduct() {
   const [subcategories, setSubcategories] = useState([]);
@@ -21,10 +21,12 @@ export default function CreateProduct() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [cloudImage, setCloudImage] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const handleSelect = (e) => {
     setCategory(e);
   };
   const uploadFileHandler = async (e) => {
+    setIsLoading(true);
     const file = e.target.files[0];
 
     const formData = new FormData();
@@ -39,7 +41,9 @@ export default function CreateProduct() {
     );
 
     setCloudImage(data);
-    console.log("data :", data);
+    if (data) {
+      setIsLoading(false);
+    }
 
     // } catch (error) {
     //   console.log(" error", error.message);
@@ -235,6 +239,9 @@ export default function CreateProduct() {
                     custom
                     onChange={uploadFileHandler}
                   />
+                  {isLoading && (
+                    <Spinner animation="border" variant="primary" />
+                  )}
                 </div>
               </form>
             </div>

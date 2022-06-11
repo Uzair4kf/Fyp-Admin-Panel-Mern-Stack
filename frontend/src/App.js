@@ -24,7 +24,8 @@ import { connect, useDispatch } from "react-redux";
 import { Route, Switch, withRouter } from "react-router-dom";
 import Calendar from "./jsx/pages/Calendar";
 import Chat from "./jsx/pages/Chat";
-
+import Cart from "./jsx/pages/Cart";
+import Slider from "./jsx/pages/Slider";
 import Index from "./jsx";
 import DataTable from "./jsx/pages/DataTable";
 // action
@@ -75,7 +76,12 @@ function App(props) {
       <Route path="/ecom-product-detail/:id">
         <Index route={<ProductDetail />} />
       </Route>
-
+      <Route path="/Cart">
+        <Index route={<Cart />} />
+      </Route>
+      <Route path="/Slider">
+        <Index route={<Slider />} />
+      </Route>
       <Route path="/CreateProduct">
         <Index route={<CreateProduct />} />
       </Route>

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDb from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import cartRoutes from "./routes/cartRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import subcategoryRoutes from "./routes/subcategoryRoutes.js";
 import calendarRoutes from "./routes/calendarRoutes.js";
@@ -23,7 +24,7 @@ app.use("/ecom-categories", categoryRoutes);
 app.use("/ecom-subcategories", subcategoryRoutes);
 app.use("/ecom-calendar", calendarRoutes);
 app.use("/upload", uploadRoutes);
-
+app.use("/cart", cartRoutes);
 const __dirname = path.resolve();
 app.use(
   "/package/uploads",
