@@ -21,6 +21,7 @@ export default function CreateProduct() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [cloudImage, setCloudImage] = useState();
+  const [secondCloudImage, setSecondCloudImage] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const handleSelect = (e) => {
     setCategory(e);
@@ -65,6 +66,26 @@ export default function CreateProduct() {
     //   console.error("error", error);
     // }
   };
+  const secondaryuploadFileHandler = async (e) => {
+    setIsLoading(true);
+    const file = e.target.files[0];
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("upload_preset", "sw2ks6ox");
+    console.log(formData.get("file"));
+
+    const { data } = await axios.post(
+      "https://api.cloudinary.com/v1_1/djpdvrlkk/image/upload",
+      formData
+    );
+
+    setSecondCloudImage(data);
+    if (data) {
+      setIsLoading(false);
+    }
+  };
 
   const updateProduct = (id) => {
     axios.put(`/ecom-product-list/${id}`, {
@@ -74,6 +95,7 @@ export default function CreateProduct() {
       price: price,
       quantity: quantity,
       image: cloudImage?.public_id,
+      secondaryimage: secondCloudImage?.public_id,
     });
   };
 
@@ -239,6 +261,27 @@ export default function CreateProduct() {
                     custom
                     onChange={uploadFileHandler}
                   />
+                  {isLoading && (
+                    <Spinner animation="border" variant="primary" />
+                  )}
+                </div>
+              </form>
+            </div>
+          </div>
+        </Col>
+        <Col xl="6">
+          <div class="card-body">
+            <div class="basic-form">
+              <form>
+                <div class="form-group mb-3">
+                  <input
+                    class="form-control form-control-lg"
+                    type="file"
+                    placeholder="image"
+                    name="image"
+                    onChange={secondaryuploadFileHandler}
+                  />
+
                   {isLoading && (
                     <Spinner animation="border" variant="primary" />
                   )}

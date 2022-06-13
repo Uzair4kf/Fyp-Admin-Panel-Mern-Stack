@@ -13,6 +13,7 @@ import SubcategoryDetail from "./jsx/pages/SubcategoryDetail";
 import ProductList from "./jsx/pages/ProductList";
 import Profile from "./jsx/pages/Profile";
 import SubCategoryList from "./jsx/pages/SubCategoryList";
+import SliderLIst from "./jsx/pages/SliderLIst";
 import CreateProduct from "./jsx/pages/CreateProduct";
 import CategoryList from "./jsx/pages/CategoryList";
 import CreateSubcategory from "./jsx/pages/CreateSubcategory";
@@ -72,7 +73,6 @@ function App(props) {
       <Route path="/app-profile">
         <Index route={<Profile />} />
       </Route>
-
       <Route path="/ecom-product-detail/:id">
         <Index route={<ProductDetail />} />
       </Route>
@@ -80,8 +80,12 @@ function App(props) {
         <Index route={<Cart />} />
       </Route>
       <Route path="/Slider">
+        <Index route={<SliderLIst />} />
+      </Route>
+      <Route path="/CreateSlider">
         <Index route={<Slider />} />
       </Route>
+
       <Route path="/CreateProduct">
         <Index route={<CreateProduct />} />
       </Route>
@@ -97,15 +101,12 @@ function App(props) {
       <Route path="/ecom-subcategories">
         <Index route={<SubCategoryList />} />
       </Route>
-
       <Route path="/SubCategoryDetail">
         <Index route={<SubcategoryDetail />} />
       </Route>
-
       <Route path="/ecom-customers">
         <Index route={<DataTable />} />
       </Route>
-
       <Route path="/ecom-product-list">
         <Index route={<ProductList />} />
       </Route>

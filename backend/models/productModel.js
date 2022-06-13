@@ -28,6 +28,10 @@ const productSchema = mongoose.Schema(
       required: false,
     },
 
+    secondaryimage: {
+      type: String,
+      required: false,
+    },
     category: {
       type: String,
       required: false,

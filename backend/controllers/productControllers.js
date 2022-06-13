@@ -43,7 +43,15 @@ const createProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   console.log("req :", req.params.id);
-  const { name, price, description, category, quantity, image } = req.body;
+  const {
+    name,
+    price,
+    description,
+    category,
+    quantity,
+    image,
+    secondaryimage,
+  } = req.body;
   const product = await Product.findById(req.params?.id);
 
   if (product) {
@@ -54,12 +62,14 @@ const updateProduct = async (req, res) => {
 
     product.quantity = quantity;
     product.image = image;
+    product.secondaryimage = secondaryimage;
   } else {
     res.status(400);
     throw new Error("Product error");
   }
 
   const updatedProduct = await product.save();
+  console.log("updatedProduct :", updatedProduct);
 
   console.log(updatedProduct);
   res.json(updatedProduct);
