@@ -57,25 +57,7 @@ export default function CreateProduct() {
       // setIsLoading(false);
     }
 
-    // } catch (error) {
-    //   console.log(" error", error.message);
-    // }
-
-    // try {
-
-    //   const config = {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   };
-
-    //   const { data } = await axios.post("/upload", formData, config);
-
-    //   setImage(data);
-    //   console.log("data :", data);
-    // } catch (error) {
-    //   console.error("error", error);
-    // }
+     
   };
   const secondaryuploadFileHandler = async (e) => {
     setIsLoading(true);

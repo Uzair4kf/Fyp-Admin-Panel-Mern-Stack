@@ -12,6 +12,7 @@ export default function CreateCategory() {
       name: name,
 
       description: description,
+      image
     });
   };
   useEffect(() => {
@@ -72,6 +73,9 @@ export default function CreateCategory() {
                     class="form-control form-control-lg"
                     type="file"
                     placeholder="image"
+                    onChange={(e) => {
+                      setImage(e.target.files[0]);
+                    }}
                   />
                 </div>
               </form>
