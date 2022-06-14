@@ -1,11 +1,22 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useLocation, useHistory } from "react-router-dom";
-import { Row, Col, Button, Dropdown, Spinner } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Button,
+  Dropdown,
+  Spinner,
+  Alert,
+  Media,
+} from "react-bootstrap";
+import FloatingLabel from "react-bootstrap-floating-label";
 
 export default function CreateProduct() {
+  const history = useHistory();
   const [subcategories, setSubcategories] = useState([]);
   const [products, setProducts] = useState();
+  const [isCreated, setIsCreated] = useState(false);
   let id = window.location.href.slice(47);
 
   let a = products?.find((y) => {
@@ -43,7 +54,7 @@ export default function CreateProduct() {
 
     setCloudImage(data);
     if (data) {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
 
     // } catch (error) {
@@ -87,8 +98,8 @@ export default function CreateProduct() {
     }
   };
 
-  const updateProduct = (id) => {
-    axios.put(`/ecom-product-list/${id}`, {
+  const updateProduct = async (id) => {
+    const res = await axios.put(`/ecom-product-list/${id}`, {
       name: name,
       category: category,
       descirption: description,
@@ -97,6 +108,11 @@ export default function CreateProduct() {
       image: cloudImage?.public_id,
       secondaryimage: secondCloudImage?.public_id,
     });
+
+    if (res.status == 200) {
+      alert("Success ! Product added");
+      // setIsCreated(true);
+    }
   };
 
   useEffect(() => {
@@ -118,6 +134,22 @@ export default function CreateProduct() {
   return (
     <>
       <Row>
+        {isCreated && (
+          <Alert variant="success" className="alert-dismissible left-icon-big">
+            <Media>
+              <div variant="" className="alert-left-icon-big">
+                <span>
+                  <i className={`mdi mdi-check-circle-outline`}></i>
+                </span>
+              </div>
+              <Media.Body>
+                <h6 className="mt-1 mb-2">Success!</h6>
+                <p className="mb-0">New Item Created</p>
+              </Media.Body>
+            </Media>
+          </Alert>
+        )}
+
         <Col xl="6">
           <div class="card-body">
             <div class="basic-form">
@@ -127,6 +159,7 @@ export default function CreateProduct() {
                     class="form-control form-control-lg"
                     type="text"
                     defaultValue={a?.name}
+                    placeholder="Product Name"
                     onChange={(e) => {
                       console.log(e.target.value);
                       if (!e.target.value == "") {
@@ -137,7 +170,6 @@ export default function CreateProduct() {
                     }}
                   />
                 </div>
-                {console.log(name)}
               </form>
             </div>
           </div>
@@ -150,7 +182,7 @@ export default function CreateProduct() {
                   <input
                     class="form-control form-control-lg"
                     type="text"
-                    placeholder={a?.description}
+                    placeholder="Product Description"
                     onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
@@ -166,7 +198,7 @@ export default function CreateProduct() {
                   <input
                     class="form-control form-control-lg"
                     type="text"
-                    placeholder={a?.brand}
+                    placeholder="Category"
                     onChange={(e) => setBrand(e.target.value)}
                   />
                 </div>
@@ -200,9 +232,17 @@ export default function CreateProduct() {
                   <input
                     class="form-control form-control-lg"
                     type="number"
-                    placeholder={a?.countInStock}
+                    placeholder="Stock"
                     onChange={(e) => setCountInStock(e.target.value)}
                   />
+                  {countInStock < 0 && (
+                    <Alert
+                      variant={`outline-danger`}
+                      className=" alert-dismissible fade show"
+                    >
+                      Stock cant be negative
+                    </Alert>
+                  )}
                 </div>
               </form>
             </div>
@@ -216,7 +256,7 @@ export default function CreateProduct() {
                   <input
                     class="form-control form-control-lg"
                     type="number"
-                    placeholder={a?.price}
+                    placeholder="Price"
                     onChange={(e) => setPrice(e.target.value)}
                   />
                 </div>
@@ -232,7 +272,7 @@ export default function CreateProduct() {
                   <input
                     class="form-control form-control-lg"
                     type="number"
-                    placeholder={a?.quantity}
+                    placeholder="Quantity"
                     onChange={(e) => setQuantity(e.target.value)}
                   />
                 </div>
@@ -295,6 +335,8 @@ export default function CreateProduct() {
           variant="primary btn-lg"
           onClick={() => {
             updateProduct(a?._id, a?.name);
+            let path = "/ecom-product-list";
+            history.push(path);
           }}
         >
           Update Product
