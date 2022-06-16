@@ -1,8 +1,8 @@
-import UploadImageContext from "./UploadImageContext"
+import UploadImageContext from "./UploadImageContext";
+import axios from "axios";
 
-const UploadImageState = ({ children }) => {
-    
-  return <UploadImageContext.Provider value>{children}</UploadImageContext.Provider>;
+const UploadImageState = ({ children, setCloudImage }) => {
+  return <UploadImageContext.Provider>{children}</UploadImageContext.Provider>;
 };
 
 export default UploadImageState;

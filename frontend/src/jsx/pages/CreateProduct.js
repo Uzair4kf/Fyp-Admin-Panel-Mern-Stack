@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import axios from "axios";
 import { useLocation, useHistory } from "react-router-dom";
 import {
@@ -9,8 +9,8 @@ import {
   Spinner,
   Alert,
   Media,
+  Form,
 } from "react-bootstrap";
-import FloatingLabel from "react-bootstrap-floating-label";
 
 export default function CreateProduct() {
   const history = useHistory();
@@ -31,6 +31,7 @@ export default function CreateProduct() {
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
+  const [isValid, setIsValid] = useState(true);
   const [cloudImage, setCloudImage] = useState();
   const [secondCloudImage, setSecondCloudImage] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -54,10 +55,8 @@ export default function CreateProduct() {
 
     setCloudImage(data);
     if (data) {
-      // setIsLoading(false);
+      setIsLoading(false);
     }
-
-     
   };
   const secondaryuploadFileHandler = async (e) => {
     setIsLoading(true);
@@ -117,212 +116,147 @@ export default function CreateProduct() {
     <>
       <Row>
         {isCreated && (
-          <Alert variant="success" className="alert-dismissible left-icon-big">
-            <Media>
-              <div variant="" className="alert-left-icon-big">
-                <span>
-                  <i className={`mdi mdi-check-circle-outline`}></i>
-                </span>
-              </div>
-              <Media.Body>
-                <h6 className="mt-1 mb-2">Success!</h6>
-                <p className="mb-0">New Item Created</p>
-              </Media.Body>
-            </Media>
-          </Alert>
+         
         )}
+        {/* <form
+          onSubmit={() => {
+            updateProduct(a?._id, a?.name);
+            let path = "/ecom-product-list";
+            history.push(path);
+          }}
+        > */}
 
-        <Col xl="6">
-          <div class="card-body">
-            <div class="basic-form">
-              <form>
-                <div class="form-group mb-3">
-                  <input
-                    class="form-control form-control-lg"
-                    type="text"
-                    defaultValue={a?.name}
-                    placeholder="Product Name"
-                    onChange={(e) => {
-                      console.log(e.target.value);
-                      if (!e.target.value == "") {
-                        setName(e.target.value);
-                      } else {
-                        setName(a?.name);
-                      }
-                    }}
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-        </Col>
-        <Col xl="6">
-          <div class="card-body">
-            <div class="basic-form">
-              <form>
-                <div class="form-group mb-3">
-                  <input
-                    class="form-control form-control-lg"
-                    type="text"
-                    placeholder="Product Description"
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-        </Col>
-        <Col xl="6">
-          <div class="card-body">
-            <div class="basic-form">
-              <form>
-                <div class="form-group mb-3">
-                  <input
-                    class="form-control form-control-lg"
-                    type="text"
-                    placeholder="Category"
-                    onChange={(e) => setBrand(e.target.value)}
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-        </Col>
-        <Dropdown>
-          <Dropdown.Toggle id="dropdown-basic">SubCategory</Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            {subcategories.map((subcategory, i) => {
-              return (
-                <Dropdown.Item
-                  onSelect={() => {
-                    handleSelect(subcategory.name);
-                  }}
-                >
-                  {subcategory.name}
-                </Dropdown.Item>
-              );
-            })}
-          </Dropdown.Menu>
-        </Dropdown>
-
-        <Col xl="6">
-          <div class="card-body">
-            <div class="basic-form">
-              <form>
-                <div class="form-group mb-3">
-                  <input
-                    class="form-control form-control-lg"
-                    type="number"
-                    placeholder="Stock"
-                    onChange={(e) => setCountInStock(e.target.value)}
-                  />
-                  {countInStock < 0 && (
-                    <Alert
-                      variant={`outline-danger`}
-                      className=" alert-dismissible fade show"
-                    >
-                      Stock cant be negative
-                    </Alert>
-                  )}
-                </div>
-              </form>
-            </div>
-          </div>
-        </Col>
-        <Col xl="6">
-          <div class="card-body">
-            <div class="basic-form">
-              <form>
-                <div class="form-group mb-3">
-                  <input
-                    class="form-control form-control-lg"
-                    type="number"
-                    placeholder="Price"
-                    onChange={(e) => setPrice(e.target.value)}
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-        </Col>
-        <Col xl="6">
-          <div class="card-body">
-            <div class="basic-form">
-              <form>
-                <div class="form-group mb-3">
-                  <input
-                    class="form-control form-control-lg"
-                    type="number"
-                    placeholder="Quantity"
-                    onChange={(e) => setQuantity(e.target.value)}
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-        </Col>
-        <Col xl="6">
-          <div class="card-body">
-            <div class="basic-form">
-              <form>
-                <div class="form-group mb-3">
-                  <input
-                    class="form-control form-control-lg"
-                    type="file"
-                    placeholder="image"
-                    name="image"
-                    onChange={(e) => {
-                      setImage(e.target.files[0]);
-                    }}
-                  />
-                  <input
-                    type="file"
-                    id="image-file"
-                    label="Choose File"
-                    custom
-                    onChange={uploadFileHandler}
-                  />
-                  {isLoading && (
-                    <Spinner animation="border" variant="primary" />
-                  )}
-                </div>
-              </form>
-            </div>
-          </div>
-        </Col>
-        <Col xl="6">
-          <div class="card-body">
-            <div class="basic-form">
-              <form>
-                <div class="form-group mb-3">
-                  <input
-                    class="form-control form-control-lg"
-                    type="file"
-                    placeholder="image"
-                    name="image"
-                    onChange={secondaryuploadFileHandler}
-                  />
-
-                  {isLoading && (
-                    <Spinner animation="border" variant="primary" />
-                  )}
-                </div>
-              </form>
-            </div>
-          </div>
-        </Col>
-        <Button
-          className="me-2"
-          variant="primary btn-lg"
-          onClick={() => {
+        <form
+          className="needs-validation"
+          noValidate=""
+          onSubmit={() => {
             updateProduct(a?._id, a?.name);
             let path = "/ecom-product-list";
             history.push(path);
           }}
         >
-          Update Product
-        </Button>
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <label htmlFor="productname">Product Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="productname"
+                placeholder=""
+                required
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  if (!e.target.value == "") {
+                    setName(e.target.value);
+                  } else {
+                    setName(a?.name);
+                  }
+                }}
+              />
+              <div className="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="product description">Product description</label>
+              <input
+                type="text"
+                className="form-control"
+                id="product description"
+                placeholder=""
+                required
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <div className="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="product description">Product Image</label>
+              <input
+                class="form-control form-control-lg"
+                type="file"
+                placeholder="image"
+                name="image"
+                onChange={(e) => {
+                  setImage(e.target.files[0]);
+                  uploadFileHandler(e);
+                }}
+              />
+              {isLoading && <Spinner animation="border" variant="primary" />}
+            </div>
+            <div className="col-md-6 mb-3">
+              <label htmlFor="product description">
+                Product Secondary Image
+              </label>
+              <input
+                class="form-control form-control-lg"
+                type="file"
+                placeholder="image"
+                name="image"
+                onChange={secondaryuploadFileHandler}
+              />
+              {isLoading && <Spinner animation="border" variant="primary" />}
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-3 mb-3">
+              <label htmlFor="cc-expiration">Quantity</label>
+              <input
+                type="number"
+                className="form-control"
+                id="cc-expiration"
+                placeholder=""
+                required
+                onChange={(e) => setQuantity(e.target.value)}
+              />
+              <div className="invalid-feedback">Expiration date required</div>
+            </div>
+
+            <div className="col-md-3 mb-3">
+              <label htmlFor="cc-expiration">Price</label>
+              <input
+                type="number"
+                className="form-control"
+                id="cc-cvv"
+                placeholder=""
+                required
+                onChange={(e) => setPrice(e.target.value)}
+              />
+              <div className="invalid-feedback">Security code required</div>
+            </div>
+            <div className="col-md-3 mb-3">
+              <label htmlFor="cc-expiration">Select Subcategory</label>
+              <Dropdown>
+                <Dropdown.Toggle id="dropdown-basic">
+                  SubCategory
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  {subcategories.map((subcategory, i) => {
+                    return (
+                      <Dropdown.Item
+                        onSelect={() => {
+                          handleSelect(subcategory.name);
+                        }}
+                      >
+                        {subcategory.name}
+                      </Dropdown.Item>
+                    );
+                  })}
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          </div>
+
+          {price < 0 && <p className="text-danger">Price cant be negative</p>}
+          <hr className="mb-4" />
+
+          <button className="btn btn-primary btn-lg btn-block" type="submit">
+            Continue to checkout
+          </button>
+        </form>
       </Row>
     </>
   );

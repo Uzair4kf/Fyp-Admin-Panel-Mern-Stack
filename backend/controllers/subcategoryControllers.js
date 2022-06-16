@@ -19,16 +19,16 @@ const createSubcategory = async (req, res) => {
   res.status(201).json(createdSubcategory);
 };
 const updateSubcategory = async (req, res) => {
-  const { name, description ,parentId} = req.body;
+  const { name, description, parentId, image } = req.body;
 
   const subcategory = await Subcategory.findById(req.params?.id);
-   
 
   if (subcategory) {
     subcategory.name = name;
 
     subcategory.description = description;
-    subcategory.parentId=parentId;
+    subcategory.parentId = parentId;
+    subcategory.image = image;
   } else {
     res.status(400);
     throw new Error("Subcategory error");

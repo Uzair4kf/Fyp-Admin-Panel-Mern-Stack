@@ -18,22 +18,23 @@ const createCategory = async (req, res) => {
   res.status(201).json(createdCategory);
 };
 const updateCategory = async (req, res) => {
-  const { name, description } = req.body;
+  const { name, description, image } = req.body;
 
-   const category = await Category.findById(req.params?.id);
+  const category = await Category.findById(req.params?.id);
   console.log(description);
-    
-    if (category) {
-      category.name = name;
 
-      category.description = description;
-    } else {
-      res.status(400);
-      throw new Error("Category error");
-    }
+  if (category) {
+    category.name = name;
 
-    const updatedCategory = await category.save();
+    category.description = description;
+    category.image = image;
+  } else {
+    res.status(400);
+    throw new Error("Category error");
+  }
 
-    res.json(updatedCategory);
+  const updatedCategory = await category.save();
+
+  res.json(updatedCategory);
 };
 export { getCategory, createCategory, updateCategory };

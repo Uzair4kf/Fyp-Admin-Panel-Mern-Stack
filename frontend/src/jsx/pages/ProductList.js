@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { Row, Button } from "react-bootstrap";
+import { Row, Button, Spinner } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import useAlan from "../hooks/useAlan";
 
@@ -18,7 +18,7 @@ export default function () {
   const [productImages, setProductImages] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [postperPage, setPostPerPage] = useState(10);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [alanInstance, setAlanInstance] = useState();
   const alanKey = `1924fbdbfa5f99b552c43824c5134e1c2e956eca572e1d8b807a3e2338fdd0dc/stage`;
 
@@ -45,7 +45,9 @@ export default function () {
   useEffect(() => {
     const fetchproducts = async () => {
       const { data } = await axios.get("/ecom-product-list");
-      console.log("data :", data);
+      if (data) {
+        setIsLoading(false);
+      }
       localStorage.setItem("products", JSON.stringify(data));
       setProducts(data);
     };
@@ -95,6 +97,13 @@ export default function () {
 
   return (
     <>
+      <div class="row page-titles mx-0">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item ">
+            <div>Product List</div>
+          </li>
+        </ol>
+      </div>
       <Button onClick={sort}>Sort</Button>
       <Button
         onClick={() => {
@@ -111,7 +120,7 @@ export default function () {
           );
         })}
       </Row>
-
+      {isLoading && <Spinner animation="border" variant="primary" />}
       <Pagination
         postperPage={postperPage}
         totalPosts={products.length}

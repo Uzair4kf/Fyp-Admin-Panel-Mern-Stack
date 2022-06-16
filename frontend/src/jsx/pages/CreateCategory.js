@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Row, Card, Col, Button, Nav, Image } from "react-bootstrap";
+import { Row, Card, Col, Button, Nav, Image, Spinner } from "react-bootstrap";
+import UploadImageContext from "../../context/UploadImageContext";
 export default function CreateCategory() {
+  const [image, setImage] = useState();
   const [categories, setCategories] = useState([]);
-  const [name, setName] = useState(""); 
+  const [name, setName] = useState("");
+  const [cloudImage, setCloudImage] = useState();
+
+  const [isLoading, setIsLoading] = useState(false);
   let id = window.location.href.slice(48);
 
   const [description, setDescription] = useState("");
@@ -12,7 +17,7 @@ export default function CreateCategory() {
       name: name,
 
       description: description,
-      image
+      image: cloudImage?.public_id,
     });
   };
   useEffect(() => {
@@ -26,8 +31,26 @@ export default function CreateCategory() {
   let a = categories?.find((y) => {
     return y._id === id;
   });
-  console.log(a);
-  console.log(a?._id);
+  const uploadFileHandler = async (e) => {
+    setIsLoading(true);
+    const file = e.target.files[0];
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("upload_preset", "sw2ks6ox");
+    console.log(formData.get("file"));
+
+    const { data } = await axios.post(
+      "https://api.cloudinary.com/v1_1/djpdvrlkk/image/upload",
+      formData
+    );
+
+    setCloudImage(data);
+    if (data) {
+      setIsLoading(false);
+    }
+  };
   return (
     <>
       <Row>
@@ -75,8 +98,12 @@ export default function CreateCategory() {
                     placeholder="image"
                     onChange={(e) => {
                       setImage(e.target.files[0]);
+                      uploadFileHandler(e);
                     }}
                   />
+                  {isLoading && (
+                    <Spinner animation="border" variant="primary" />
+                  )}
                 </div>
               </form>
             </div>

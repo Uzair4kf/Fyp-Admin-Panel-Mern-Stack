@@ -65,7 +65,7 @@ const UiCards = () => {
           <div className="widget-stat card bg-danger ">
             <div className="card-body p-4">
               <div className="media">
-                <span className="me-3">
+                <span className="me-3 ">
                   <i className="la la-dollar"></i>
                 </span>
                 <div className="media-body text-white">
@@ -78,6 +78,69 @@ const UiCards = () => {
                     ></div>
                   </div>
                   <small>30% Increase in 30 Days</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-xl-3 col-xxl-4 col-lg-6 col-sm-6">
+          <div className="widget-stat card bg-secondary   ">
+            {" "}
+            {/* card bg-primary{" "} */}
+            <div className="card-body  p-4">
+              <div className="media text-white">
+                <span className="me-3  ">
+                  <i className="la la-cubes text-white"></i>
+                </span>
+                <div className="media-body text-white">
+                  <p className="mb-1">Products</p>
+                  <h3 className="text-white">3280</h3>
+                  <Link to={"/ecom-product-list"} className="btn  text-white">
+                    Go to Products
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-xl-3 col-xxl-4 col-lg-6 col-sm-6">
+          <div className="widget-stat card bg-success  ">
+            {" "}
+            {/* card bg-primary{" "} */}
+            <div className="card-body  p-4">
+              <div className="media text-white">
+                <span className="me-3  ">
+                  <i className="la la-suitcase text-white"></i>
+                </span>
+                <div className="media-body text-white">
+                  <p className="mb-1">Sub-Categories</p>
+
+                  <Link to={"/ecom-subcategories"} className="btn text-white ">
+                    Go to subcategories
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-xl-3 col-xxl-4 col-lg-6 col-sm-6">
+          <div className="widget-stat card bg-dark  ">
+            {" "}
+            {/* card bg-primary{" "} */}
+            <div className="card-body  p-4">
+              <div className="media text-white">
+                <span className="me-3  ">
+                  <i
+                    className="
+la la-paw text-white"
+                  ></i>
+                </span>
+                <div className="media-body text-white">
+                  <p className="mb-1">Categories</p>
+
+                  <Link to={"/ecom-categories"} className="btn text-white">
+                    Go to Categories
+                  </Link>
                 </div>
               </div>
             </div>

@@ -9,6 +9,7 @@ import Navb from "./jsx/layouts/nav";
 import Footer from "./jsx/layouts/Footer";
 import ProductDetail from "./jsx/pages/ProductDetail";
 import SearchContext from "./context/SearchContext";
+import UploadImageState from "./context/UploadImageState";
 import SubcategoryDetail from "./jsx/pages/SubcategoryDetail";
 import ProductList from "./jsx/pages/ProductList";
 import Profile from "./jsx/pages/Profile";
@@ -62,58 +63,61 @@ function App(props) {
   );
 
   let routesb = (
-    <Switch>
-      <Route path="/dashboard">
-        <Index
-          route={<UiCards />}
-          route2={<EventSidebar />}
-          route3={<Editable />}
-        />
-      </Route>
-      <Route path="/app-profile">
-        <Index route={<Profile />} />
-      </Route>
-      <Route path="/ecom-product-detail/:id">
-        <Index route={<ProductDetail />} />
-      </Route>
-      <Route path="/Cart">
-        <Index route={<Cart />} />
-      </Route>
-      <Route path="/Slider">
-        <Index route={<SliderLIst />} />
-      </Route>
-      <Route path="/CreateSlider">
-        <Index route={<Slider />} />
-      </Route>
+    <UploadImageState>
+      <Switch>
+        <Route path="/dashboard">
+          <Index
+            route={<UiCards />}
+            route2={<EventSidebar />}
+            route3={<Editable />}
+          />
+        </Route>
+        <Route path="/app-profile">
+          <Index route={<Profile />} />
+        </Route>
+        <Route path="/ecom-product-detail/:id">
+          <Index route={<ProductDetail />} />
+        </Route>
+        <Route path="/Cart">
+          <Index route={<Cart />} />
+        </Route>
+        <Route path="/Slider">
+          <Index route={<SliderLIst />} />
+        </Route>
+        <Route path="/CreateSlider">
+          <Index route={<Slider />} />
+        </Route>
 
-      <Route path="/CreateProduct">
-        <Index route={<CreateProduct />} />
-      </Route>
-      <Route path="/chat">
-        <Index route={<Chat />} />
-      </Route>
-      <Route path="/CreateCategory">
-        <Index route={<CreateCategory />} />
-      </Route>
-      <Route path="/CreateSubcategory">
-        <Index route={<CreateSubcategory />} />
-      </Route>
-      <Route path="/ecom-subcategories">
-        <Index route={<SubCategoryList />} />
-      </Route>
-      <Route path="/SubCategoryDetail">
-        <Index route={<SubcategoryDetail />} />
-      </Route>
-      <Route path="/ecom-customers">
-        <Index route={<DataTable />} />
-      </Route>
-      <Route path="/ecom-product-list">
-        <Index route={<ProductList />} />
-      </Route>
-      <Route path="/ecom-categories">
-        <Index route={<CategoryList />} />
-      </Route>
-    </Switch>
+        <Route path="/CreateProduct">
+          <Index route={<CreateProduct />} />
+        </Route>
+        <Route path="/chat">
+          <Index route={<Chat />} />
+        </Route>
+        <Route path="/CreateCategory">
+          <Index route={<CreateCategory />} />
+        </Route>
+        <Route path="/CreateSubcategory">
+          <Index route={<CreateSubcategory />} />
+        </Route>
+
+        <Route path="/ecom-subcategories">
+          <Index route={<SubCategoryList />} />
+        </Route>
+        <Route path="/SubCategoryDetail">
+          <Index route={<SubcategoryDetail />} />
+        </Route>
+        <Route path="/ecom-customers">
+          <Index route={<DataTable />} />
+        </Route>
+        <Route path="/ecom-product-list">
+          <Index route={<ProductList />} />
+        </Route>
+        <Route path="/ecom-categories">
+          <Index route={<CategoryList />} />
+        </Route>
+      </Switch>
+    </UploadImageState>
   );
 
   if (props.isAuthenticated) {

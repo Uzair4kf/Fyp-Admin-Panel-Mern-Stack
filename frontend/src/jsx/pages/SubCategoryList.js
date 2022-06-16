@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import { Row, Button } from "react-bootstrap";
+import { Row, Button, Spinner } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import SubCategory from "./SubCategory";
 
 export default function SubCategoryList() {
+  const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
   const createSubcategory = async () => {
     const { data } = await axios.post(`/ecom-subcategories`, {});
@@ -16,6 +17,9 @@ export default function SubCategoryList() {
   useEffect(() => {
     const fetchsubcategories = async () => {
       const { data } = await axios.get("/ecom-subcategories");
+      if (data) {
+        setIsLoading(false);
+      }
 
       setSubcategories(data);
     };
@@ -36,6 +40,7 @@ export default function SubCategoryList() {
           return <SubCategory subcategory={subcategory} key={i} />;
         })}
       </Row>
+      {isLoading && <Spinner animation="border" variant="primary" />}
     </>
   );
 }
