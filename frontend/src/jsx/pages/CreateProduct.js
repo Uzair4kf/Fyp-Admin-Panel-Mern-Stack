@@ -115,9 +115,7 @@ export default function CreateProduct() {
   return (
     <>
       <Row>
-        {isCreated && (
-         
-        )}
+        
         {/* <form
           onSubmit={() => {
             updateProduct(a?._id, a?.name);

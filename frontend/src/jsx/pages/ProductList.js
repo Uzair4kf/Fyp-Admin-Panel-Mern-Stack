@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
-import { Row, Button, Spinner } from "react-bootstrap";
+import React, { useState, useEffect, useRef, useContext, useMemo } from "react";
+import { Row, Button, Spinner, Card, Dropdown, Col } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import useAlan from "../hooks/useAlan";
-
+import Title from "../layouts/Title";
 import Product from "./Product";
 import axios from "axios";
 import Pagination from "../components/bootstrap/Pagination";
@@ -12,14 +12,17 @@ export default function () {
   const history = useHistory();
   const { searchItem } = useContext(SearchContext);
 
+  const p = JSON.parse(localStorage.getItem("products"));
   //Initialization
   let array = [];
   const [products, setProducts] = useState(array);
-  const [productImages, setProductImages] = useState();
+
+  const [persistProducts, setPersistProducts] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [postperPage, setPostPerPage] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
   const [alanInstance, setAlanInstance] = useState();
+  const [subcategories, setSubcategories] = useState([]);
   const alanKey = `1924fbdbfa5f99b552c43824c5134e1c2e956eca572e1d8b807a3e2338fdd0dc/stage`;
 
   const deleteP = (id) => [axios.delete(`/ecom-product-list/${id}`)];
@@ -50,9 +53,21 @@ export default function () {
       }
       localStorage.setItem("products", JSON.stringify(data));
       setProducts(data);
+      setPersistProducts(data);
     };
     fetchproducts();
-  }, [i]);
+    const fetchsubcategories = async () => {
+      const { data } = await axios.get("/ecom-subcategories");
+
+      setSubcategories(data);
+    };
+    fetchsubcategories();
+    // setProducts(
+    //   products.map((product) => {
+    //     return product.name.includes(searchItem);
+    //   })
+    // );
+  }, [i, searchItem]);
 
   useEffect(() => {
     const fetchimages = async () => {
@@ -63,6 +78,12 @@ export default function () {
     };
     fetchimages();
   }, []);
+  // useEffect(() => {
+  //   setProducts(
+
+  //   );
+  // }, [searchItem]);
+
   const sort = (e) => {
     e.preventDefault();
     sets((prev) => prev + 1);
@@ -71,6 +92,13 @@ export default function () {
         return b.price - a.price;
       })
     );
+  };
+  const filterbySubcategory = (name) => {
+    console.log(" products", products);
+    const filteredProducts = p.filter((product) => {
+      return product.category === name;
+    });
+    setProducts(filteredProducts);
   };
 
   //hooks
@@ -97,22 +125,52 @@ export default function () {
 
   return (
     <>
-      <div class="row page-titles mx-0">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item ">
-            <div>Product List</div>
-          </li>
-        </ol>
-      </div>
-      <Button onClick={sort}>Sort</Button>
-      <Button
-        onClick={() => {
-          createProduct();
-        }}
-      >
-        Create
-      </Button>
+      <Title name="Product List" />
+      <Row>
+        <Col xl="3">
+          <Button onClick={sort}>Sort</Button>
+        </Col>
+        <Col xl="3">
+          <Button
+            onClick={() => {
+              createProduct();
+            }}
+          >
+            Create
+          </Button>
+        </Col>
+        {console.log(" subcat", subcategories)}
 
+        <Col xl="3">
+          <div className="basic-dropdown">
+            <Dropdown>
+              <Dropdown.Toggle variant="primary">
+                Filter By Sub Category
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  onClick={() => {
+                    setProducts(p);
+                  }}
+                >
+                  Default
+                </Dropdown.Item>
+                {subcategories.map((subcategory) => {
+                  return (
+                    <Dropdown.Item
+                      onClick={() => {
+                        filterbySubcategory(subcategory.name);
+                      }}
+                    >
+                      {subcategory.name}
+                    </Dropdown.Item>
+                  );
+                })}
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+        </Col>
+      </Row>
       <Row>
         {currentProducts.map((product, i) => {
           return (

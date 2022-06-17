@@ -4,7 +4,7 @@ import axios from "axios";
 import { Row, Button, Spinner } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import SubCategory from "./SubCategory";
-
+import Title from "../layouts/Title";
 export default function SubCategoryList() {
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
@@ -27,6 +27,7 @@ export default function SubCategoryList() {
   }, []);
   return (
     <>
+      <Title name="Subcategory List" />
       <Button
         onClick={() => {
           createSubcategory();

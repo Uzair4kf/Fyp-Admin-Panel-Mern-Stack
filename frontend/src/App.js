@@ -9,6 +9,7 @@ import Navb from "./jsx/layouts/nav";
 import Footer from "./jsx/layouts/Footer";
 import ProductDetail from "./jsx/pages/ProductDetail";
 import SearchContext from "./context/SearchContext";
+import SearchState from "./context/SearchState";
 import UploadImageState from "./context/UploadImageState";
 import SubcategoryDetail from "./jsx/pages/SubcategoryDetail";
 import ProductList from "./jsx/pages/ProductList";
@@ -63,7 +64,7 @@ function App(props) {
   );
 
   let routesb = (
-    <UploadImageState>
+   
       <Switch>
         <Route path="/dashboard">
           <Index
@@ -117,7 +118,7 @@ function App(props) {
           <Index route={<CategoryList />} />
         </Route>
       </Switch>
-    </UploadImageState>
+    
   );
 
   if (props.isAuthenticated) {

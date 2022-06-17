@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Button } from "react-bootstrap";
 import axios from "axios";
+import Title from "../layouts/Title";
 import Categories from "./Categories";
 import { Link, useHistory } from "react-router-dom";
 export default function CategoryList() {
@@ -21,6 +22,7 @@ export default function CategoryList() {
   }, []);
   return (
     <>
+    <Title name="Category List"/>
       <Button
         onClick={() => {
           createCategory();

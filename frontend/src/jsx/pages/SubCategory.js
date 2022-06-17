@@ -2,6 +2,7 @@ import React from "react";
 import { Image, Transformation } from "cloudinary-react";
 import { Row, Card, Col, Button, Nav } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
+import Title from "../layouts/Title";
 export default function SubCategory({ subcategory }) {
   let navigate = useHistory();
   const updateSubcategory = () => {
@@ -51,6 +52,7 @@ export default function SubCategory({ subcategory }) {
           </Card.Footer>
         </Card>
       </Col>{" "} */}
+ 
       <div class="col-lg-12 col-xl-6">
         <div class="card">
           <div class="card-body">
@@ -59,7 +61,7 @@ export default function SubCategory({ subcategory }) {
                 <div class="new-arrival-product mb-4 mb-xxl-4 mb-md-0">
                   <div class="new-arrivals-img-contnent">
                     <Image cloudName="djpdvrlkk" publicId={subcategory.image}>
-                      <Transformation crop="scale" width="200" height="300" />
+                      <Transformation crop="scale" width="100" height="100" />
                     </Image>
                   </div>
                 </div>

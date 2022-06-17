@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Card, Col, Button, Nav } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
+import Title from "../layouts/Title";
 import { Image, Transformation } from "cloudinary-react";
 export default function Categories({ category }) {
   const navigate = useHistory();
@@ -49,6 +50,7 @@ export default function Categories({ category }) {
           </Card.Body>
         </Card>
       </Col> */}
+      
       <div class="col-lg-12 col-xl-6">
         <div class="card">
           <div class="card-body">
