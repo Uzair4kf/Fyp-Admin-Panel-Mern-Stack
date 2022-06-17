@@ -18,6 +18,15 @@ const createSubcategory = async (req, res) => {
 
   res.status(201).json(createdSubcategory);
 };
+const deleteSubcategory = async (req, res) => {
+  const subcategory = await Subcategory.findById(req.params.id);
+  if (subcategory) {
+    await subcategory.remove();
+    res.json({ message: "subcategory removed" });
+  } else {
+    res.status(404).json({ message: "subcategory not found" });
+  }
+};
 const updateSubcategory = async (req, res) => {
   const { name, description, parentId, image } = req.body;
 
@@ -38,4 +47,9 @@ const updateSubcategory = async (req, res) => {
 
   res.json(updatedSubcategory);
 };
-export { getSubcategory, createSubcategory, updateSubcategory };
+export {
+  getSubcategory,
+  createSubcategory,
+  updateSubcategory,
+  deleteSubcategory,
+};
