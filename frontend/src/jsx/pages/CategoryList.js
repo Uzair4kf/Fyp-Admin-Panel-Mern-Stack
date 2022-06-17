@@ -17,12 +17,13 @@ export default function CategoryList() {
       const { data } = await axios.get("/ecom-categories");
 
       setCategories(data);
+      localStorage.setItem("categorires", JSON.stringify(data));
     };
     fetchcategories();
   }, []);
   return (
     <>
-    <Title name="Category List"/>
+      <Title name="Category List" />
       <Button
         onClick={() => {
           createCategory();
@@ -32,9 +33,7 @@ export default function CategoryList() {
       </Button>
       <Row>
         {categories.map((category, i) => {
-          return (
-            <Categories category={category} key={i}   />
-          );
+          return <Categories category={category} key={i} />;
         })}
       </Row>
     </>

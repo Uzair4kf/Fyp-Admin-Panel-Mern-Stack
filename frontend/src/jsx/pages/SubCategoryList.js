@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import { Row, Button, Spinner } from "react-bootstrap";
+import { Row, Button, Spinner, Dropdown, Col } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import SubCategory from "./SubCategory";
 import Title from "../layouts/Title";
 export default function SubCategoryList() {
   const [isLoading, setIsLoading] = useState(true);
+  const [categories, setCategories] = useState([]);
   const history = useHistory();
+  const sub = JSON.parse(localStorage.getItem("products"));
+  console.log("categories :", categories);
   const createSubcategory = async () => {
     const { data } = await axios.post(`/ecom-subcategories`, {});
     let path = `/CreateSubcategory/${data._id}`;
@@ -20,22 +23,69 @@ export default function SubCategoryList() {
       if (data) {
         setIsLoading(false);
       }
-
+      localStorage.setItem("subcategories", JSON.stringify(data));
       setSubcategories(data);
     };
+
     fetchsubcategories();
+    const fetchcategories = async () => {
+      const { data } = await axios.get("/ecom-categories");
+
+      setCategories(data);
+      localStorage.setItem("categorires", JSON.stringify(data));
+    };
+    fetchcategories();
   }, []);
+
+  const filterbycategory = (name) => {
+    const filteredSubcategories = sub.filter((product) => {
+      return product.category === name;
+    });
+    setSubcategories(filteredSubcategories);
+  };
   return (
     <>
       <Title name="Subcategory List" />
-      <Button
-        onClick={() => {
-          createSubcategory();
-        }}
-      >
-        Create Sub Category
-      </Button>
-
+      <Row>
+        <Col xl="3">
+          <Button
+            onClick={() => {
+              createSubcategory();
+            }}
+          >
+            Create Sub Category
+          </Button>
+        </Col>
+        <Col xl="3">
+          <div className="basic-dropdown">
+            <Dropdown>
+              <Dropdown.Toggle variant="primary">
+                Filter By Category
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item
+                // onClick={() => {
+                //   setProducts(p);
+                // }}
+                >
+                  Default
+                </Dropdown.Item>
+                {categories.map((category) => {
+                  return (
+                    <Dropdown.Item
+                      onClick={() => {
+                        filterbycategory(category.name);
+                      }}
+                    >
+                      {category.name}
+                    </Dropdown.Item>
+                  );
+                })}
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+        </Col>
+      </Row>
       <Row>
         {subcategories.map((subcategory, i) => {
           return <SubCategory subcategory={subcategory} key={i} />;
