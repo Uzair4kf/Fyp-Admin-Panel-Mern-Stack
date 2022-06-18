@@ -1,11 +1,12 @@
-import React from "react";
-import { Row, Card, Col, Button, Nav } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Row, Card, Col, Button, Nav, Alert } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import Title from "../layouts/Title";
 import { Image, Transformation } from "cloudinary-react";
 import axios from "axios";
 export default function Categories({ category, setChange }) {
   const navigate = useHistory();
+  const [hasSubcategory, setHasSubcategory] = useState(false);
   const updateCategory = () => {
     let path = `/CreateCategory/${category._id}`;
 
@@ -14,10 +15,11 @@ export default function Categories({ category, setChange }) {
   const deleteCategory = async (id) => {
     const { data } = await axios.delete(`/ecom-categories/${id}`);
 
-    if(data.message == "category has subcategories "){
-      
+    if (data.message == "category has subcategories ") {
+      setHasSubcategory(true);
     }
   };
+
   return (
     <>
       {/* <Col lg="12" xl="6">
@@ -104,6 +106,31 @@ export default function Categories({ category, setChange }) {
           </div>
         </div>
       </div> */}
+      {hasSubcategory && (
+        <Alert
+          variant="danger"
+          className="alert-dismissible solid alert-alt fade show"
+        >
+          {
+            <svg
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="me-2"
+            >
+              <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
+              <line x1="15" y1="9" x2="9" y2="15"></line>
+              <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+          }
+          <strong>Error!</strong> Cant delete category which has subcategories
+        </Alert>
+      )}
       <div class="col-lg-12 col-xl-3">
         <div class="card">
           <div class="card-body">

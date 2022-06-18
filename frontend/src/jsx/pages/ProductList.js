@@ -78,12 +78,7 @@ export default function () {
     };
     fetchimages();
   }, []);
-  // useEffect(() => {
-  //   setProducts(
-
-  //   );
-  // }, [searchItem]);
-
+ 
   const sort = (e) => {
     e.preventDefault();
     sets((prev) => prev + 1);
