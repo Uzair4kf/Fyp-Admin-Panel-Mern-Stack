@@ -27,8 +27,7 @@ export default function () {
 
   const deleteP = (id) => [axios.delete(`/ecom-product-list/${id}`)];
   const createProduct = async () => {
-    const { data } = await axios.post(`/ecom-product-list`, {});
-    let path = `/CreateProduct/${data._id}`;
+    let path = `/CreateProduct/create`;
     history.push(path);
   };
 
@@ -78,7 +77,7 @@ export default function () {
     };
     fetchimages();
   }, []);
- 
+
   const sort = (e) => {
     e.preventDefault();
     sets((prev) => prev + 1);

@@ -17,11 +17,16 @@ export default function CreateProduct() {
   const [subcategories, setSubcategories] = useState([]);
   const [products, setProducts] = useState();
   const [isCreated, setIsCreated] = useState(false);
-  let id = window.location.href.slice(47);
+  const [isCreate, setIsCreate] = useState(false);
 
-  let a = products?.find((y) => {
-    return y._id === id;
-  });
+  let id = window.location.href.slice(47);
+  let state = window.location.href.slice(47);
+
+  useEffect(() => {
+    if (state == "create") {
+      setIsCreate(true);
+    }
+  }, []);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -95,6 +100,18 @@ export default function CreateProduct() {
       // setIsCreated(true);
     }
   };
+  // const createProduct = async ( ) => {
+  //   const { data } = await axios.post(`/ecom-product-list`, {
+  //     name: name,
+  //     category: category,
+  //     descirption: description,
+
+  //     price: price,
+  //     quantity: quantity,
+  //     image: cloudImage?.public_id,
+  //     secondaryimage: secondCloudImage?.public_id,
+  //   });
+  // };
 
   useEffect(() => {
     const fetchproducts = async () => {
@@ -115,7 +132,6 @@ export default function CreateProduct() {
   return (
     <>
       <Row>
-        
         {/* <form
           onSubmit={() => {
             updateProduct(a?._id, a?.name);
@@ -128,9 +144,13 @@ export default function CreateProduct() {
           className="needs-validation"
           noValidate=""
           onSubmit={() => {
-            updateProduct(a?._id, a?.name);
-            let path = "/ecom-product-list";
-            history.push(path);
+            if (isCreate) {
+              // createProduct();
+            } else {
+              updateProduct();
+              let path = "/ecom-product-list";
+              history.push(path);
+            }
           }}
         >
           <div className="row">
@@ -147,7 +167,7 @@ export default function CreateProduct() {
                   if (!e.target.value == "") {
                     setName(e.target.value);
                   } else {
-                    setName(a?.name);
+                    setName();
                   }
                 }}
               />
@@ -251,9 +271,15 @@ export default function CreateProduct() {
           {price < 0 && <p className="text-danger">Price cant be negative</p>}
           <hr className="mb-4" />
 
-          <button className="btn btn-primary btn-lg btn-block" type="submit">
-            Continue to checkout
-          </button>
+          {isCreate ? (
+            <button className="btn btn-primary btn-lg btn-block" type="submit">
+              Create Product
+            </button>
+          ) : (
+            <button className="btn btn-primary btn-lg btn-block" type="submit">
+              Update Product
+            </button>
+          )}
         </form>
       </Row>
     </>
