@@ -19,7 +19,11 @@ export default function Categories({ category, setChange }) {
       setHasSubcategory(true);
     }
   };
-
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHasSubcategory(false);
+    }, 4000);
+  }, [hasSubcategory]);
   return (
     <>
       {/* <Col lg="12" xl="6">
