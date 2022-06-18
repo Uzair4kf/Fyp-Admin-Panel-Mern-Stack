@@ -1,4 +1,5 @@
 import Category from "../models/categoryModel.js";
+import Subcategory from "../models/subcategoryModel.js";
 const getCategory = async (req, res) => {
   const categories = await Category.find({});
 
@@ -37,4 +38,24 @@ const updateCategory = async (req, res) => {
 
   res.json(updatedCategory);
 };
-export { getCategory, createCategory, updateCategory };
+const deletecategory = async (req, res) => {
+  const category = await Category.findById(req.params.id);
+  if (category) {
+    const subcategories = await Subcategory.find({});
+
+    const exist = [];
+    subcategories.filter((subcategory) => {
+      exist.push(subcategory.parentId == category.name);
+    });
+
+    if (exist.includes(true)) {
+      res.status(200).json({ message: "category has subcategories " });
+    } else {
+      await category.remove();
+      res.json({ message: "category removed" });
+    }
+  } else {
+    res.status(404).json({ message: "category not found" });
+  }
+};
+export { getCategory, createCategory, updateCategory, deletecategory };

@@ -6,6 +6,7 @@ import Categories from "./Categories";
 import { Link, useHistory } from "react-router-dom";
 export default function CategoryList() {
   const [categories, setCategories] = useState([]);
+  const [change, setChange] = useState(0);
   const history = useHistory();
   const createCategory = async () => {
     const { data } = await axios.post(`/ecom-categories`, {});
@@ -20,7 +21,7 @@ export default function CategoryList() {
       localStorage.setItem("categorires", JSON.stringify(data));
     };
     fetchcategories();
-  }, []);
+  }, [change]);
   return (
     <>
       <Title name="Category List" />
@@ -33,7 +34,9 @@ export default function CategoryList() {
       </Button>
       <Row>
         {categories.map((category, i) => {
-          return <Categories category={category} key={i} />;
+          return (
+            <Categories category={category} key={i} setChange={setChange} />
+          );
         })}
       </Row>
     </>

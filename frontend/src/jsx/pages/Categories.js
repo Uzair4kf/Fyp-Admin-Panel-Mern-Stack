@@ -3,12 +3,20 @@ import { Row, Card, Col, Button, Nav } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import Title from "../layouts/Title";
 import { Image, Transformation } from "cloudinary-react";
-export default function Categories({ category }) {
+import axios from "axios";
+export default function Categories({ category, setChange }) {
   const navigate = useHistory();
   const updateCategory = () => {
     let path = `/CreateCategory/${category._id}`;
 
     navigate.push(path);
+  };
+  const deleteCategory = async (id) => {
+    const { data } = await axios.delete(`/ecom-categories/${id}`);
+
+    if(data.message == "category has subcategories "){
+      
+    }
   };
   return (
     <>
@@ -50,8 +58,8 @@ export default function Categories({ category }) {
           </Card.Body>
         </Card>
       </Col> */}
-      
-      <div class="col-lg-12 col-xl-6">
+
+      {/* <div class="col-lg-12 col-xl-6">
         <div class="card">
           <div class="card-body">
             <div class="row m-b-30">
@@ -90,6 +98,50 @@ export default function Categories({ category }) {
                     available, but the majority have suffered alteration in some
                     form, by injected humour, or randomised words.
                   </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> */}
+      <div class="col-lg-12 col-xl-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="row m-b-30">
+              <div class="col-md-5 col-xxl-12">
+                <div class="new-arrival-product mb-4 mb-xxl-4 mb-md-0">
+                  <div class="new-arrivals-img-contnent">
+                    <Image cloudName="djpdvrlkk" publicId={category.image} />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-7 col-xxl-12">
+                <div class="new-arrival-content position-relative">
+                  <h4>
+                    <Link to={{ pathname: `/CategoryDetail/${category._id}` }}>
+                      {category.name}
+                    </Link>
+                  </h4>
+                  <Button
+                    className="me-2"
+                    variant="danger btn-rounded"
+                    onClick={() => {
+                      setChange((prev) => prev + 1);
+
+                      deleteCategory(category._id);
+                    }}
+                  >
+                    Remove
+                  </Button>
+                  {/* <Button
+                    className="me-2"
+                    variant="success"
+                    onClick={createProduct}
+                  >
+                    Update
+                  </Button> */}
+
+                  <p class="text-content">{category.description}</p>
                 </div>
               </div>
             </div>

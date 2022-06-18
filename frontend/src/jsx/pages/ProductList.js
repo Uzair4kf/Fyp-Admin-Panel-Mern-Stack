@@ -113,7 +113,7 @@ export default function () {
   //       onCommand: ({ command }) => {
   //         if ((command = "product")) {
   //           window.location.href =
-  //             "http://localhost:3000/react/demo/ecom-product-list";
+  //             "http://localhost:3006/react/demo/ecom-product-list";
   //         }
   //         if ((command = "price")) {
 

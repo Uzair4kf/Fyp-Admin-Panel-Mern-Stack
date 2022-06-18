@@ -3,8 +3,13 @@ import {
   getCategory,
   createCategory,
   updateCategory,
+  deletecategory,
 } from "../controllers/categoryControllers.js";
-const router = express.Router(); 
+const router = express.Router();
 router.route("/").get(getCategory).post(createCategory);
-router.use(express.json()).route("/:id").put(updateCategory);
+router
+  .use(express.json())
+  .route("/:id")
+  .put(updateCategory)
+  .delete(deletecategory);
 export default router;

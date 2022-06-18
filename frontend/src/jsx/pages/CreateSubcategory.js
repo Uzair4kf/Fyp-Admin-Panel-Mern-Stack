@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import {   useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import {
   Row,
@@ -22,7 +22,7 @@ export default function CreateSubcategory() {
   const [image, setImage] = useState();
   const [category, setCategory] = useState();
   let id = window.location.href.slice(51);
-  const history=useHistory()
+  const history = useHistory();
   let a = subcategories?.find((y) => {
     return y._id === id;
   });
@@ -220,6 +220,26 @@ export default function CreateSubcategory() {
               }}
             />
             {isLoading && <Spinner animation="border" variant="primary" />}
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="product description">Select Category</label>
+            <Dropdown>
+              <Dropdown.Toggle id="dropdown-basic">Category</Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                {categories?.map((category, i) => {
+                  return (
+                    <Dropdown.Item
+                      onSelect={() => {
+                        handleSelect(category.name);
+                      }}
+                    >
+                      {category.name}
+                    </Dropdown.Item>
+                  );
+                })}
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
         </div>
 
