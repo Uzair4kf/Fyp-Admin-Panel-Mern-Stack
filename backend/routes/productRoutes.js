@@ -22,9 +22,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const router = express.Router();
- 
 
-router.route("/").get(getProducts).post(upload.single("file"), createProduct);
+router
+  .use(express.json())
+  .route("/")
+  .get(getProducts)
+  .post(upload.single("file"), createProduct);
 
 router
   .use(express.json())

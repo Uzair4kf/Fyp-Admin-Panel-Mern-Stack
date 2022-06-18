@@ -25,16 +25,24 @@ const deleteProduct = async (req, res) => {
   }
 };
 const createProduct = async (req, res) => {
+  const {
+    name,
+    price,
+    description,
+    category,
+    quantity,
+    image,
+    secondaryimage,
+  } = req.body;
   const product = new Product({
-    name: "Sample name",
-    price: 100,
-    image: "../data/7.jpg",
-    brand: "Sample brand",
-    rating: 2,
-    category: "Sample category",
-    countInStock: 0,
+    name: name,
+    price: price,
+    image: image,
+    secondaryimage: secondaryimage,
+    category: category,
+    quantity: quantity,
     numReviews: 0,
-    description: "Sample description",
+    description: description,
   });
   const createdProduct = await product.save();
 
