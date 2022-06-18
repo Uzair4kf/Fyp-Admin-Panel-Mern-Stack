@@ -1,4 +1,5 @@
 import Subcategory from "../models/subcategoryModel.js";
+import Product from "../models/productModel.js";
 const getSubcategory = async (req, res) => {
   const subcategories = await Subcategory.find({});
 
@@ -21,8 +22,23 @@ const createSubcategory = async (req, res) => {
 const deleteSubcategory = async (req, res) => {
   const subcategory = await Subcategory.findById(req.params.id);
   if (subcategory) {
-    await subcategory.remove();
-    res.json({ message: "subcategory removed" });
+    // await subcategory.remove();
+    // res.json({ message: "subcategory removed" });
+
+    const products = await Product.find({});
+    const exist = [];
+    products.filter((product) => {
+      
+
+        exist.push(product.category == subcategory.name);
+    });
+
+    if (exist.includes(true)) {
+      res.status(200).json({ message: "subcategory has products " });
+    } else {
+      await subcategory.remove();
+      res.json({ message: "subcategory removed" });
+    }
   } else {
     res.status(404).json({ message: "subcategory not found" });
   }

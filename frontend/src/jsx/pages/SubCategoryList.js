@@ -8,6 +8,7 @@ import Title from "../layouts/Title";
 export default function SubCategoryList() {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
+  const [change, setChange] = useState(0);
   const history = useHistory();
   const sub = JSON.parse(localStorage.getItem("products"));
   console.log("categories :", categories);
@@ -35,7 +36,7 @@ export default function SubCategoryList() {
       localStorage.setItem("categorires", JSON.stringify(data));
     };
     fetchcategories();
-  }, []);
+  }, [change]);
 
   const filterbycategory = (name) => {
     const filteredSubcategories = sub.filter((product) => {
@@ -88,7 +89,13 @@ export default function SubCategoryList() {
       </Row>
       <Row>
         {subcategories.map((subcategory, i) => {
-          return <SubCategory subcategory={subcategory} key={i} />;
+          return (
+            <SubCategory
+              subcategory={subcategory}
+              key={i}
+              setChange={setChange}
+            />
+          );
         })}
       </Row>
       {isLoading && <Spinner animation="border" variant="primary" />}
