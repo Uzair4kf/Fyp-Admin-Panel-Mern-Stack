@@ -8,11 +8,26 @@ export default function CreateCategory() {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [cloudImage, setCloudImage] = useState();
-
+  const [isCreate, setIsCreate] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   let id = window.location.href.slice(48);
+  let state = window.location.href.slice(48);
+  console.log("state :", state);
+
   const navigate = useHistory();
   const [description, setDescription] = useState("");
+
+  const createCategory = async () => {
+    await axios.post(`/ecom-categories`, {
+      name: name,
+
+      description: description,
+      image: cloudImage?.public_id,
+    });
+    let path = `/ecom-categories`;
+    navigate.push(path);
+  };
+
   const updateCategory = (id) => {
     axios.put(`/ecom-categories/${id}`, {
       name: name,
@@ -30,6 +45,9 @@ export default function CreateCategory() {
       setCategories(data);
     };
     fetchcategories();
+    if (state == "create") {
+      setIsCreate(true);
+    }
   }, []);
   let a = categories?.find((y) => {
     return y._id === id;
@@ -112,15 +130,27 @@ export default function CreateCategory() {
             </div>
           </div>
         </Col>
-        <Button
-          className="me-2"
-          variant="primary btn-lg"
-          onClick={() => {
-            updateCategory(a?._id);
-          }}
-        >
-          Update Category
-        </Button>
+        {isCreate ? (
+          <Button
+            className="me-2"
+            variant="primary btn-lg"
+            onClick={() => {
+              createCategory();
+            }}
+          >
+            Create Category
+          </Button>
+        ) : (
+          <Button
+            className="me-2"
+            variant="primary btn-lg"
+            onClick={() => {
+              updateCategory(a?._id);
+            }}
+          >
+            Update Category
+          </Button>
+        )}
       </Row>
     </>
   );

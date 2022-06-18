@@ -7,12 +7,14 @@ const getCategory = async (req, res) => {
 };
 
 const createCategory = async (req, res) => {
+  const { name, description, image } = req.body;
+  console.log("req.body :", req.body);
+
   const category = new Category({
-    name: "Sample name",
+    name: name,
 
-    image: "/",
-
-    description: "Sample description",
+    description: description,
+    image: image,
   });
   const createdCategory = await category.save();
 
@@ -48,15 +50,12 @@ const deletecategory = async (req, res) => {
       exist.push(subcategory.parentId == category.name);
     });
 
-    if( exist.includes(true)){
-       res.status(200).json({ message: "category has subcategories " });
-    }
-    else{
+    if (exist.includes(true)) {
+      res.status(200).json({ message: "category has subcategories " });
+    } else {
       await category.remove();
       res.json({ message: "category removed" });
     }
-   
-    
   } else {
     res.status(404).json({ message: "category not found" });
   }

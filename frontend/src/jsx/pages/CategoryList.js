@@ -8,9 +8,8 @@ export default function CategoryList() {
   const [categories, setCategories] = useState([]);
   const [change, setChange] = useState(0);
   const history = useHistory();
-  const createCategory = async () => {
-    const { data } = await axios.post(`/ecom-categories`, {});
-    let path = `/CreateCategory/${data._id}`;
+  const createCategory =   () => {
+    let path = `/CreateCategory/create`;
     history.push(path);
   };
   useEffect(() => {

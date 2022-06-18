@@ -6,7 +6,7 @@ import {
   deletecategory,
 } from "../controllers/categoryControllers.js";
 const router = express.Router();
-router.route("/").get(getCategory).post(createCategory);
+router.use(express.json()).route("/").get(getCategory).post(createCategory);
 router
   .use(express.json())
   .route("/:id")
