@@ -7,9 +7,11 @@ import axios from "axios";
 export default function Categories({ category, setChange }) {
   const navigate = useHistory();
   const [hasSubcategory, setHasSubcategory] = useState(false);
-  const updateCategory = () => {
+  const updateCategory = async () => {
     let path = `/CreateCategory/${category._id}`;
-
+  
+  //  await axios.put(`/ecom-categories`, {});
+    
     navigate.push(path);
   };
   const deleteCategory = async (id) => {
@@ -164,13 +166,13 @@ export default function Categories({ category, setChange }) {
                   >
                     Remove
                   </Button>
-                  {/* <Button
+                  <Button
                     className="me-2"
                     variant="success"
-                    onClick={createProduct}
+                    onClick={updateCategory}
                   >
                     Update
-                  </Button> */}
+                  </Button>
 
                   <p class="text-content">{category.description}</p>
                 </div>

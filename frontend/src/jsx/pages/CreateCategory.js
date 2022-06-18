@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { Link, useHistory } from "react-router-dom";
 import { Row, Card, Col, Button, Nav, Image, Spinner } from "react-bootstrap";
 import UploadImageContext from "../../context/UploadImageContext";
 export default function CreateCategory() {
@@ -10,7 +11,7 @@ export default function CreateCategory() {
 
   const [isLoading, setIsLoading] = useState(false);
   let id = window.location.href.slice(48);
-
+  const navigate = useHistory();
   const [description, setDescription] = useState("");
   const updateCategory = (id) => {
     axios.put(`/ecom-categories/${id}`, {
@@ -19,6 +20,8 @@ export default function CreateCategory() {
       description: description,
       image: cloudImage?.public_id,
     });
+    let path = `/ecom-categories`;
+    navigate.push(path);
   };
   useEffect(() => {
     const fetchcategories = async () => {

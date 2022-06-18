@@ -48,12 +48,15 @@ const deletecategory = async (req, res) => {
       exist.push(subcategory.parentId == category.name);
     });
 
-    if (exist.includes(true)) {
-      res.status(200).json({ message: "category has subcategories " });
-    } else {
+    if( exist.includes(true)){
+       res.status(200).json({ message: "category has subcategories " });
+    }
+    else{
       await category.remove();
       res.json({ message: "category removed" });
     }
+   
+    
   } else {
     res.status(404).json({ message: "category not found" });
   }
