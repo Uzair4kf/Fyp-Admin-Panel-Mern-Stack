@@ -11,7 +11,11 @@ import {
   Media,
   Form,
 } from "react-bootstrap";
-
+import {
+  updateProduct,
+  uploadFileHandler,
+  secondaryuploadFileHandler,
+} from "./ProductMethods";
 export default function CreateProduct() {
   const history = useHistory();
   const [subcategories, setSubcategories] = useState([]);
@@ -50,27 +54,38 @@ export default function CreateProduct() {
     setCategory(e);
   };
 
-  console.log(" name", name);
-  const uploadFileHandler = async (e) => {
-    setIsLoading(true);
-    const file = e.target.files[0];
+  const updateProduct = async (id) => {
+    const res = await axios.put(`/ecom-product-list/${id}`, {
+      name: name,
+      category: category,
+      description: description,
+      price: price,
+      quantity: quantity,
+      image: cloudImage?.public_id,
+      secondaryimage: secondCloudImage?.public_id,
+    });
+    const { data } = res;
 
-    const formData = new FormData();
-
-    formData.append("file", file);
-    formData.append("upload_preset", "sw2ks6ox");
-    console.log(formData.get("file"));
-
-    const { data } = await axios.post(
-      "https://api.cloudinary.com/v1_1/djpdvrlkk/image/upload",
-      formData
-    );
-
-    setCloudImage(data);
-    if (data) {
-      setIsLoading(false);
+    if (res.status == 200) {
+      alert("Success ! Product added");
+      // setIsCreated(true);
     }
   };
+
+  const createProduct = async () => {
+    console.log(" create");
+    const { data } = await axios.post(`/ecom-product-list`, {
+      name: name,
+      category: category,
+      description: description,
+
+      price: price,
+      quantity: quantity,
+      image: cloudImage?.public_id,
+      secondaryimage: secondCloudImage?.public_id,
+    });
+  };
+
   const secondaryuploadFileHandler = async (e) => {
     setIsLoading(true);
     const file = e.target.files[0];
@@ -91,35 +106,25 @@ export default function CreateProduct() {
       setIsLoading(false);
     }
   };
+  const uploadFileHandler = async (e) => {
+    setIsLoading(true);
+    const file = e.target.files[0];
 
-  const updateProduct = async (id) => {
-    const res = await axios.put(`/ecom-product-list/${id}`, {
-      name: name,
-      category: category,
-      descirption: description,
-      price: price,
-      quantity: quantity,
-      image: cloudImage?.public_id,
-      secondaryimage: secondCloudImage?.public_id,
-    });
+    const formData = new FormData();
 
-    if (res.status == 200) {
-      alert("Success ! Product added");
-      // setIsCreated(true);
+    formData.append("file", file);
+    formData.append("upload_preset", "sw2ks6ox");
+    console.log(formData.get("file"));
+
+    const { data } = await axios.post(
+      "https://api.cloudinary.com/v1_1/djpdvrlkk/image/upload",
+      formData
+    );
+
+    setCloudImage(data);
+    if (data) {
+      setIsLoading(false);
     }
-  };
-  const createProduct = async () => {
-    console.log(" create");
-    const { data } = await axios.post(`/ecom-product-list`, {
-      name: name,
-      category: category,
-      descirption: description,
-
-      price: price,
-      quantity: quantity,
-      image: cloudImage?.public_id,
-      secondaryimage: secondCloudImage?.public_id,
-    });
   };
 
   useEffect(() => {

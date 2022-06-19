@@ -152,11 +152,14 @@ export default function ({ product, deleteP, seti }) {
                     Availability:{" "}
                     <span class="item">
                       {" "}
-                      In stock <i class="fa fa-check-circle text-success"></i>
+                      Quantity{" "}
+                      <i class="fa fa-check-circle text-success">
+                        {product.quantity}
+                      </i>
                     </span>
                   </p>
                   <p>
-                    Product code: <span class="item">0405689</span>{" "}
+                    Product code: <span class="item">{product._id}</span>{" "}
                   </p>
                   <p>
                     Sub Category <span class="item"> {product.category}</span>{" "}

@@ -60,17 +60,33 @@ const updateProduct = async (req, res) => {
     image,
     secondaryimage,
   } = req.body;
+
+  console.log(" name", description);
   const product = await Product.findById(req.params?.id);
 
   if (product) {
-    product.name = name;
-    product.price = price;
-    product.description = description;
-    product.category = category;
+    if (name) {
+      product.name = name;
+    }
+    if (price) {
+      product.price = price;
+    }
+    if (description) {
+      product.description = description;
+    }
+    if (category) {
+      product.category = category;
+    }
 
-    product.quantity = quantity;
-    product.image = image;
-    product.secondaryimage = secondaryimage;
+    if (quantity) {
+      product.quantity = quantity;
+    }
+    if (image) {
+      product.image = image;
+    }
+    if (secondaryimage) {
+      product.secondaryimage = secondaryimage;
+    }
   } else {
     res.status(400);
     throw new Error("Product error");
