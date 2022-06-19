@@ -100,18 +100,19 @@ export default function CreateProduct() {
       // setIsCreated(true);
     }
   };
-  // const createProduct = async ( ) => {
-  //   const { data } = await axios.post(`/ecom-product-list`, {
-  //     name: name,
-  //     category: category,
-  //     descirption: description,
+  const createProduct = async () => {
+    console.log(" create");
+    const { data } = await axios.post(`/ecom-product-list`, {
+      name: name,
+      category: category,
+      descirption: description,
 
-  //     price: price,
-  //     quantity: quantity,
-  //     image: cloudImage?.public_id,
-  //     secondaryimage: secondCloudImage?.public_id,
-  //   });
-  // };
+      price: price,
+      quantity: quantity,
+      image: cloudImage?.public_id,
+      secondaryimage: secondCloudImage?.public_id,
+    });
+  };
 
   useEffect(() => {
     const fetchproducts = async () => {
@@ -143,9 +144,15 @@ export default function CreateProduct() {
         <form
           className="needs-validation"
           noValidate=""
-          onSubmit={() => {
+          onSubmit={(e) => {
+            e.preventDefault();
+
+            console.log(" :");
             if (isCreate) {
-              // createProduct();
+              console.log(" :");
+              createProduct();
+              let path = "/ecom-product-list";
+              history.push(path);
             } else {
               updateProduct();
               let path = "/ecom-product-list";
