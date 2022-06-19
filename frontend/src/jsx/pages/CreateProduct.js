@@ -22,6 +22,11 @@ export default function CreateProduct() {
   let id = window.location.href.slice(47);
   let state = window.location.href.slice(47);
 
+  let product = products?.find((product) => {
+    return product._id == id;
+  });
+  console.log("product :", product);
+
   useEffect(() => {
     if (state == "create") {
       setIsCreate(true);
@@ -167,7 +172,7 @@ export default function CreateProduct() {
                 type="text"
                 className="form-control"
                 id="productname"
-                placeholder=""
+                placeholder={product?.name}
                 required
                 onChange={(e) => {
                   console.log(e.target.value);
@@ -188,7 +193,7 @@ export default function CreateProduct() {
                 type="text"
                 className="form-control"
                 id="product description"
-                placeholder=""
+                placeholder={product?.description}
                 required
                 onChange={(e) => setDescription(e.target.value)}
               />
@@ -232,7 +237,7 @@ export default function CreateProduct() {
                 type="number"
                 className="form-control"
                 id="cc-expiration"
-                placeholder=""
+                placeholder={product?.quantity}
                 required
                 onChange={(e) => setQuantity(e.target.value)}
               />
@@ -245,7 +250,7 @@ export default function CreateProduct() {
                 type="number"
                 className="form-control"
                 id="cc-cvv"
-                placeholder=""
+                placeholder={product?.price}
                 required
                 onChange={(e) => setPrice(e.target.value)}
               />
