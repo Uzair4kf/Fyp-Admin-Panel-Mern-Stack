@@ -14,7 +14,7 @@ export default function SubCategoryList() {
   console.log("categories :", categories);
   const createSubcategory = async () => {
     const { data } = await axios.post(`/ecom-subcategories`, {});
-    let path = `/CreateSubcategory/${data._id}`;
+    let path = `/CreateSubcategory/create`;
     history.push(path);
   };
   const [subcategories, setSubcategories] = useState([]);

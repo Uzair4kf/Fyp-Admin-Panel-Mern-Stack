@@ -7,13 +7,14 @@ const getSubcategory = async (req, res) => {
 };
 
 const createSubcategory = async (req, res) => {
+  const { name, description, parentId, image } = req.body;
   const subcategory = new Subcategory({
-    name: "Sample name",
+    name: name,
 
-    image: "/",
+    image: image,
 
-    description: "Sample description",
-    parentId: "",
+    description: description,
+    parentId: parentId,
   });
   const createdSubcategory = await subcategory.save();
 
@@ -28,9 +29,7 @@ const deleteSubcategory = async (req, res) => {
     const products = await Product.find({});
     const exist = [];
     products.filter((product) => {
-      
-
-        exist.push(product.category == subcategory.name);
+      exist.push(product.category == subcategory.name);
     });
 
     if (exist.includes(true)) {

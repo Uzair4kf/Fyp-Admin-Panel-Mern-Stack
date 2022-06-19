@@ -21,7 +21,10 @@ export default function CreateSubcategory() {
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState();
   const [category, setCategory] = useState();
+  const [isCreate, setIsCreate] = useState(false);
   let id = window.location.href.slice(51);
+  let state = window.location.href.slice(51);
+  console.log("state :", state);
   const history = useHistory();
   let a = subcategories?.find((y) => {
     return y._id === id;
@@ -34,8 +37,20 @@ export default function CreateSubcategory() {
       image: cloudImage?.public_id,
     });
   };
+  const createSubcategory = async () => {
+    const { data } = await axios.post(`/ecom-subcategories`, {
+      name: name,
+      parentId: category,
+      description: description,
+      image: cloudImage?.public_id,
+    });
+  };
 
-  console.log(" cloud image", cloudImage?.public_id);
+  useEffect(() => {
+    if (state == "create") {
+      setIsCreate(true);
+    }
+  }, []);
   useEffect(() => {
     const fetchsubcategories = async () => {
       const { data } = await axios.get("/ecom-subcategories");
@@ -76,99 +91,15 @@ export default function CreateSubcategory() {
 
   return (
     <>
-      {/* <Row>
-        <Col xl="6">
-          <div class="card-body">
-            <div class="basic-form">
-              <form>
-                <div class="form-group mb-3">
-                  <input
-                    class="form-control form-control-lg"
-                    type="text"
-                    placeholder="Sub Category Name"
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-        </Col>
-        <Col xl="6">
-          <div class="card-body">
-            <div class="basic-form">
-              <form>
-                <div class="form-group mb-3">
-                  <input
-                    class="form-control form-control-lg"
-                    type="text"
-                    placeholder="Sub Category Description"
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
-        </Col>
-        <Col xl="6">
-          <Dropdown>
-            <Dropdown.Toggle id="dropdown-basic">Category</Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              {categories?.map((category, i) => {
-                return (
-                  <Dropdown.Item
-                    onSelect={() => {
-                      handleSelect(category.name);
-                    }}
-                  >
-                    {category.name}
-                  </Dropdown.Item>
-                );
-              })}
-            </Dropdown.Menu>
-          </Dropdown>
-        </Col>
-
-        <Col xl="6">
-          <div class="card-body">
-            <div class="basic-form">
-              <form>
-                <div class="form-group mb-3">
-                  <input
-                    class="form-control form-control-lg"
-                    type="file"
-                    placeholder="image"
-                    onChange={(e) => {
-                      setImage(e.target.files[0]);
-                      uploadFileHandler(e);
-                    }}
-                  />
-                  {isLoading && (
-                    <Spinner animation="border" variant="primary" />
-                  )}
-                </div>
-              </form>
-            </div>
-          </div>
-        </Col>
-        <Button
-          className="me-2"
-          variant="primary btn-lg"
-          onClick={() => {
-            updateSubcategory(a?._id);
-          }}
-        >
-          Update Category
-        </Button>
-      </Row> */}
-
       <form
         className="needs-validation"
         noValidate=""
         onSubmit={() => {
-          updateSubcategory(a?._id);
+          if (isCreate) {
+            createSubcategory();
+          } else {
+            updateSubcategory(a?._id);
+          }
           let path = "/ecom-subcategories";
           history.push(path);
         }}
@@ -180,7 +111,7 @@ export default function CreateSubcategory() {
               type="text"
               className="form-control"
               id="productname"
-              placeholder=""
+              defaultValue={a?.name}
               required
               onChange={(e) => {
                 console.log(e.target.value);
@@ -201,7 +132,7 @@ export default function CreateSubcategory() {
               type="text"
               className="form-control"
               id="product description"
-              placeholder=""
+              defaultValue={a?.description}
               required
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -219,7 +150,11 @@ export default function CreateSubcategory() {
                 uploadFileHandler(e);
               }}
             />
+
             {isLoading && <Spinner animation="border" variant="primary" />}
+            <div className="col-md-6 mb-3">
+              <Image cloudName="djpdvrlkk" publicId={a?.image} />
+            </div>
           </div>
           <div className="col-md-6 mb-3">
             <label htmlFor="product description">Select Category</label>
@@ -243,9 +178,15 @@ export default function CreateSubcategory() {
           </div>
         </div>
 
-        <button className="btn btn-primary btn-lg btn-block" type="submit">
-          Create Subcategory
-        </button>
+        {isCreate ? (
+          <button className="btn btn-primary btn-lg btn-block" type="submit">
+            Create Subcategory
+          </button>
+        ) : (
+          <button className="btn btn-primary btn-lg btn-block" type="submit">
+            Update Subcategory
+          </button>
+        )}
       </form>
     </>
   );

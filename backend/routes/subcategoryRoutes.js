@@ -6,7 +6,11 @@ import {
   deleteSubcategory,
 } from "../controllers/subcategoryControllers.js";
 const router = express.Router();
-router.route("/").get(getSubcategory).post(createSubcategory);
+router
+  .use(express.json())
+  .route("/")
+  .get(getSubcategory)
+  .post(createSubcategory);
 router
   .use(express.json())
   .route("/:id")
