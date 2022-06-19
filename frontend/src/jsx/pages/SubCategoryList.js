@@ -10,7 +10,7 @@ export default function SubCategoryList() {
   const [categories, setCategories] = useState([]);
   const [change, setChange] = useState(0);
   const history = useHistory();
-  const sub = JSON.parse(localStorage.getItem("products"));
+  const sub = JSON.parse(localStorage.getItem("subcategories"));
   console.log("categories :", categories);
   const createSubcategory = async () => {
     const { data } = await axios.post(`/ecom-subcategories`, {});
@@ -39,9 +39,11 @@ export default function SubCategoryList() {
   }, [change]);
 
   const filterbycategory = (name) => {
+    console.log(" sub", sub);
     const filteredSubcategories = sub.filter((product) => {
-      return product.category === name;
+      return product.parentId === name;
     });
+    console.log("filteredSubcategories :", filteredSubcategories);
     setSubcategories(filteredSubcategories);
   };
   return (

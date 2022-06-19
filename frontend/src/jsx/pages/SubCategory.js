@@ -185,7 +185,7 @@ export default function SubCategory({ subcategory, setChange }) {
                   >
                     Update
                   </Button>
-
+                  <p class="text"> Category {subcategory.parentId}</p>
                   <p class="text-content">{subcategory.description}</p>
                 </div>
               </div>

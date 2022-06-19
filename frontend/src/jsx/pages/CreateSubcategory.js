@@ -153,7 +153,9 @@ export default function CreateSubcategory() {
 
             {isLoading && <Spinner animation="border" variant="primary" />}
             <div className="col-md-6 mb-3">
-              <Image cloudName="djpdvrlkk" publicId={a?.image} />
+              <div class="new-arrivals-img-contnent">
+                <Image cloudName="djpdvrlkk" publicId={a?.image} />
+              </div>
             </div>
           </div>
           <div className="col-md-6 mb-3">
