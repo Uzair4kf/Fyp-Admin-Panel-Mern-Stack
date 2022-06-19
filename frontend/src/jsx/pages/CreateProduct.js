@@ -45,9 +45,12 @@ export default function CreateProduct() {
   const [cloudImage, setCloudImage] = useState();
   const [secondCloudImage, setSecondCloudImage] = useState();
   const [isLoading, setIsLoading] = useState(false);
+
   const handleSelect = (e) => {
     setCategory(e);
   };
+
+  console.log(" name", name);
   const uploadFileHandler = async (e) => {
     setIsLoading(true);
     const file = e.target.files[0];
@@ -159,7 +162,7 @@ export default function CreateProduct() {
               let path = "/ecom-product-list";
               history.push(path);
             } else {
-              updateProduct();
+              updateProduct(product?._id);
               let path = "/ecom-product-list";
               history.push(path);
             }
@@ -172,7 +175,7 @@ export default function CreateProduct() {
                 type="text"
                 className="form-control"
                 id="productname"
-                placeholder={product?.name}
+                defaultValue={product?.name}
                 required
                 onChange={(e) => {
                   console.log(e.target.value);
@@ -193,7 +196,7 @@ export default function CreateProduct() {
                 type="text"
                 className="form-control"
                 id="product description"
-                placeholder={product?.description}
+                defaultValue={product?.description}
                 required
                 onChange={(e) => setDescription(e.target.value)}
               />
@@ -237,7 +240,7 @@ export default function CreateProduct() {
                 type="number"
                 className="form-control"
                 id="cc-expiration"
-                placeholder={product?.quantity}
+                defaultValue={product?.quantity}
                 required
                 onChange={(e) => setQuantity(e.target.value)}
               />
@@ -250,7 +253,7 @@ export default function CreateProduct() {
                 type="number"
                 className="form-control"
                 id="cc-cvv"
-                placeholder={product?.price}
+                defaultValue={product?.price}
                 required
                 onChange={(e) => setPrice(e.target.value)}
               />
