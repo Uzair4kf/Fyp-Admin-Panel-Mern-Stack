@@ -127,7 +127,7 @@ const EventSidebar = ({ activeEvent }) => {
           </div>
         </div>
       </div>
-      {console.log(formatDate)}
+    
 
       <Modal className="fade bd-example-modal-lg" show={largeModal} size="lg">
         <Modal.Header>
