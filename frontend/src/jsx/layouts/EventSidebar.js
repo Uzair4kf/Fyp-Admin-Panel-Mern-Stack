@@ -56,7 +56,7 @@ const EventSidebar = ({ activeEvent }) => {
                 if (date.toLocaleDateString() == event.eventDate) {
                   const eventname = event.name;
                   setEventName(eventname);
-                  console.log("eventname :", event.name);
+  
                 }
               });
 
