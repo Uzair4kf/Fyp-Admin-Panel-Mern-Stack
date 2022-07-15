@@ -60,7 +60,7 @@ const EventSidebar = ({ activeEvent }) => {
                 }
               });
 
-              console.log(" dateLocal", date.toLocaleDateString());
+ 
 
               // if (cal) {
               //   setEventName(cal.eventname);
