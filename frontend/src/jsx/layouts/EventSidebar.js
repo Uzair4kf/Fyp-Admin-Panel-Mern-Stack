@@ -62,10 +62,7 @@ const EventSidebar = ({ activeEvent }) => {
 
  
 
-              // if (cal) {
-              //   setEventName(cal.eventname);
-              //   setEventDesc(cal.description);
-              // }
+              
             }}
             value={date}
           />
