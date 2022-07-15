@@ -376,8 +376,11 @@ const SideBar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link className={`${path === "/chat"}`} to="/chat">
-                      Chat
+                    <Link
+                      className={`${path === "/SreProject"}`}
+                      to="/SreProject"
+                    >
+                      Sre
                     </Link>
                   </li>
                   <li>

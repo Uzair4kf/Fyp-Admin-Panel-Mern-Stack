@@ -7,10 +7,10 @@ import {
   Col,
   Button,
   Nav,
-  Image,
   Dropdown,
   Spinner,
 } from "react-bootstrap";
+import { Image, Transformation } from "cloudinary-react";
 export default function CreateSubcategory() {
   const [subcategories, setSubcategories] = useState([]);
   const [name, setName] = useState("");
@@ -47,6 +47,7 @@ export default function CreateSubcategory() {
   };
 
   useEffect(() => {
+ 
     if (state == "create") {
       setIsCreate(true);
     }
@@ -152,11 +153,11 @@ export default function CreateSubcategory() {
             />
 
             {isLoading && <Spinner animation="border" variant="primary" />}
-            <div className="col-md-6 mb-3">
-              <div class="new-arrivals-img-contnent">
-                <Image cloudName="djpdvrlkk" publicId={a?.image} />
-              </div>
-            </div>
+          </div>
+          <div className="col-md-6 mb-3">
+            <Image cloudName="djpdvrlkk" publicId={a?.image}>
+              <Transformation crop="scale" width="200" height="300" />
+            </Image>
           </div>
           <div className="col-md-6 mb-3">
             <label htmlFor="product description">Select Category</label>

@@ -43,10 +43,10 @@ const EventSidebar = ({ activeEvent }) => {
       className={`event-sidebar dz-scroll ${activeEvent ? "active" : ""}`}
       id="eventSidebar"
     >
-      <div className="card rounded-0 mb-0 h-auto bg-transparent shadow-none">
-        <div className="card-body event-calender pb-2 text-center">
+      <div className="card rounded-0 mb-0 h-auto bg-transparent shadow-none   ">
+        <div className="card-body event-calender pb-2 text-center col-xl-6 col-sm-6">
           <Calendar
-            className={hasEvent && "c1"}
+            className="col-xl-12 col-sm-6"
             onClickDay={(date) => {
               setLargeModal(true);
               setDate(date);
@@ -54,8 +54,8 @@ const EventSidebar = ({ activeEvent }) => {
 
               calendarEvents.map((event) => {
                 if (date.toLocaleDateString() == event.eventDate) {
-                const eventname = event.name;
-                setEventName(eventname);
+                  const eventname = event.name;
+                  setEventName(eventname);
                   console.log("eventname :", event.name);
                 }
               });
@@ -70,6 +70,65 @@ const EventSidebar = ({ activeEvent }) => {
             }}
             value={date}
           />
+        </div>
+        <div className="col-xl-12 col-sm-6">
+          <div className="card">
+            <div className="card-header border-0 pb-0">
+              <h4 className="mb-0">Booked Room Today</h4>
+            </div>
+            <div className="card-body">
+              <div className="progress mb-4" style={{ height: "13px" }}>
+                <div
+                  className="progress-bar gradient-5 progress-animated"
+                  style={{ width: "95%", height: "13px" }}
+                > 
+                  <span className="sr-only">15% Complete</span>
+                </div>
+              </div>
+              <div className="progress mb-4" style={{ height: "13px" }}>
+                <div
+                  className="progress-bar gradient-6 progress-animated"
+                  style={{ width: "55%", height: "13px" }}
+                >
+                  <span className="sr-only">45% Complete</span>
+                </div>
+              </div>
+              <div
+                className="progress default-progress"
+                style={{ height: "13px" }}
+              >
+                <div
+                  className="progress-bar gradient-7 progress-animated"
+                  style={{ width: "55%", height: "13px" }}
+                >
+                  <span className="sr-only">45% Complete</span>
+                </div>
+              </div>
+              <div className="d-flex mt-4 progress-bar-legend align-items-center justify-content-between">
+                <div className="d-flex">
+                  <span className="marker gradient-5"></span>
+                  <div>
+                    <p className="status">Pending</p>
+                    <span className="result">234</span>
+                  </div>
+                </div>
+                <div className="d-flex">
+                  <span className="marker gradient-6"></span>
+                  <div>
+                    <p className="status">Done</p>
+                    <span className="result">65</span>
+                  </div>
+                </div>
+                <div className="d-flex">
+                  <span className="marker gradient-7"></span>
+                  <div>
+                    <p className="status">Finish</p>
+                    <span className="result">763</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       {console.log(formatDate)}

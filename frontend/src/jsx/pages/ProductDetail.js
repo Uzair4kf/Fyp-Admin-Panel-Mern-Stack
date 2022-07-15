@@ -417,14 +417,7 @@ export default function ({ match }) {
                         value="1"
                       />
                     </div>
-                    <div class="shopping-cart mt-3">
-                      <a
-                        class="btn btn-primary btn-lg"
-                        href="/react/demo/ecom-product-detail"
-                      >
-                        <i class="fa fa-shopping-basket me-2"></i>Add to cart
-                      </a>
-                    </div>
+                    
                   </div>
                 </div>
               </div>

@@ -13,9 +13,11 @@ import SearchState from "./context/SearchState";
 import UploadImageState from "./context/UploadImageState";
 import SubcategoryDetail from "./jsx/pages/SubcategoryDetail";
 import ProductList from "./jsx/pages/ProductList";
+import BarChart from "./jsx/pages/BarChart";
 import Profile from "./jsx/pages/Profile";
 import SubCategoryList from "./jsx/pages/SubCategoryList";
 import SliderLIst from "./jsx/pages/SliderLIst";
+import SREProject from "./jsx/pages/SREProject";
 import CreateProduct from "./jsx/pages/CreateProduct";
 import CategoryList from "./jsx/pages/CategoryList";
 import CreateSubcategory from "./jsx/pages/CreateSubcategory";
@@ -64,61 +66,62 @@ function App(props) {
   );
 
   let routesb = (
-   
-      <Switch>
-        <Route path="/dashboard">
-          <Index
-            route={<UiCards />}
-            route2={<EventSidebar />}
-            route3={<Editable />}
-          />
-        </Route>
-        <Route path="/app-profile">
-          <Index route={<Profile />} />
-        </Route>
-        <Route path="/ecom-product-detail/:id">
-          <Index route={<ProductDetail />} />
-        </Route>
-        <Route path="/Cart">
-          <Index route={<Cart />} />
-        </Route>
-        <Route path="/Slider">
-          <Index route={<SliderLIst />} />
-        </Route>
-        <Route path="/CreateSlider">
-          <Index route={<Slider />} />
-        </Route>
+    <Switch>
+      <Route path="/dashboard">
+        <Index
+          route={<UiCards />}
+          route2={<EventSidebar />}
+          route3={<Editable />}
+          route4={<BarChart />}
+        />
+      </Route>
+      <Route path="/app-profile">
+        <Index route={<Profile />} />
+      </Route>
+      <Route path="/ecom-product-detail/:id">
+        <Index route={<ProductDetail />} />
+      </Route>
+      <Route path="/Cart">
+        <Index route={<Cart />} />
+      </Route>
+      <Route path="/Slider">
+        <Index route={<SliderLIst />} />
+      </Route>
+      <Route path="/CreateSlider">
+        <Index route={<Slider />} />
+      </Route>
 
-        <Route path="/CreateProduct">
-          <Index route={<CreateProduct />} />
-        </Route>
-        <Route path="/chat">
-          <Index route={<Chat />} />
-        </Route>
-        <Route path="/CreateCategory">
-          <Index route={<CreateCategory />} />
-        </Route>
-        <Route path="/CreateSubcategory">
-          <Index route={<CreateSubcategory />} />
-        </Route>
-
-        <Route path="/ecom-subcategories">
-          <Index route={<SubCategoryList />} />
-        </Route>
-        <Route path="/SubCategoryDetail">
-          <Index route={<SubcategoryDetail />} />
-        </Route>
-        <Route path="/ecom-customers">
-          <Index route={<DataTable />} />
-        </Route>
-        <Route path="/ecom-product-list">
-          <Index route={<ProductList />} />
-        </Route>
-        <Route path="/ecom-categories">
-          <Index route={<CategoryList />} />
-        </Route>
-      </Switch>
-    
+      <Route path="/CreateProduct">
+        <Index route={<CreateProduct />} />
+      </Route>
+      <Route path="/chat">
+        <Index route={<Chat />} />
+      </Route>
+      <Route path="/CreateCategory">
+        <Index route={<CreateCategory />} />
+      </Route>
+      <Route path="/CreateSubcategory">
+        <Index route={<CreateSubcategory />} />
+      </Route>
+      <Route path="/SreProject">
+        <Index route={<SREProject />} />
+      </Route>
+      <Route path="/ecom-subcategories">
+        <Index route={<SubCategoryList />} />
+      </Route>
+      <Route path="/SubCategoryDetail">
+        <Index route={<SubcategoryDetail />} />
+      </Route>
+      <Route path="/ecom-customers">
+        <Index route={<DataTable />} />
+      </Route>
+      <Route path="/ecom-product-list">
+        <Index route={<ProductList />} />
+      </Route>
+      <Route path="/ecom-categories">
+        <Index route={<CategoryList />} />
+      </Route>
+    </Switch>
   );
 
   if (props.isAuthenticated) {
