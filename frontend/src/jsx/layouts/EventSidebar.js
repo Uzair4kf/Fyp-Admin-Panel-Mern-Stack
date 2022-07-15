@@ -60,7 +60,6 @@ const EventSidebar = ({ activeEvent }) => {
                 }
               });
 
-              console.log("eventname", eventName);
               console.log(" dateLocal", date.toLocaleDateString());
 
               // if (cal) {
@@ -81,7 +80,7 @@ const EventSidebar = ({ activeEvent }) => {
                 <div
                   className="progress-bar gradient-5 progress-animated"
                   style={{ width: "95%", height: "13px" }}
-                > 
+                >
                   <span className="sr-only">15% Complete</span>
                 </div>
               </div>
