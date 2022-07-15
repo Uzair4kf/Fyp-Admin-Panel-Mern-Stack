@@ -50,7 +50,7 @@ const EventSidebar = ({ activeEvent }) => {
             onClickDay={(date) => {
               setLargeModal(true);
               setDate(date);
-              console.log("date :", date);
+             
 
               calendarEvents.map((event) => {
                 if (date.toLocaleDateString() == event.eventDate) {
