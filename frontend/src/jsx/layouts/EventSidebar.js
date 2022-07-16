@@ -19,7 +19,7 @@ const EventSidebar = ({ activeEvent }) => {
   const [hasEvent, setHasEvent] = useState(false);
   const [calendarEvents, setCalendarEvents] = useState([]);
   const [cal, setCal] = useState();
-  // const fulldate = date.getDate().concat(date.getMonth() + 1);
+ 
 
   useEffect(() => {
     const fetchcalendarEvents = async () => {
