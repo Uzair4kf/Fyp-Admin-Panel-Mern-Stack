@@ -7,7 +7,8 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment";
 
-import axios from "axios";
+import axios from "axios"; 
+
 
 const EventSidebar = ({ activeEvent }) => {
   const [date, setDate] = useState(new Date());
