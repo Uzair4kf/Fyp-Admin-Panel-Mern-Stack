@@ -66,7 +66,7 @@ const EventSidebar = ({ activeEvent }) => {
             }}
             value={date}
           />
-        </div>
+        </div>   
         <div className="col-xl-12 col-sm-6">
           <div className="card">
             <div className="card-header border-0 pb-0">
