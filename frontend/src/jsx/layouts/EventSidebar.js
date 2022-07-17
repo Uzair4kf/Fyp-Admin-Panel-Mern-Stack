@@ -62,7 +62,7 @@ const EventSidebar = ({ activeEvent }) => {
 
  
 
-              
+                 
             }}
             value={date}
           />
